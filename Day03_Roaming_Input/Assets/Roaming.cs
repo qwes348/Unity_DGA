@@ -47,7 +47,7 @@ public class Roaming : MonoBehaviour
         Vector3 dir = nextPoint - transform.position;
         dir.y = 0;
         //transform.Rotate(Vector3.up * Vector3.Angle(transform.forward, dir) * 10f * Time.deltaTime);  // Angle은 주어진 두각중에 무조건 큰값만나옴(양의수만)
-        transform.Rotate(Vector3.up * Vector3.SignedAngle(transform.forward, dir, Vector3.up) * 10f * Time.deltaTime); // 이과정을 간단하게 해주는게 Lerp함수
+        /*transform.Rotate(Vector3.up * Vector3.SignedAngle(transform.forward, dir, Vector3.up) * 10f * Time.deltaTime)*/; // 이과정을 간단하게 해주는게 Lerp함수
         //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir, Vector3.up), 0.15f);  // Vector3.up 생략가능 디푤트가 up이기 때문
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 0.15f);
 
