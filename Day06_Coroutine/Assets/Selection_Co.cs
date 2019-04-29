@@ -31,27 +31,30 @@ public class Selection_Co : MonoBehaviour
     {
         if (!isRotating)
         {
-            isRotating = true;
-            remainingAngle = angle;
-            remainingDuration = duration;
-        }
-        if (isRotating)
-        {
-            while (isRotating)
+            float y = transform.rotation.y;
+            yield return null;
+            if(y == transform.rotation.y)
             {
-                float anglePerFrame = (remainingAngle / remainingDuration) * Time.deltaTime; // 한프레임의 회전값
-                if (remainingAngle < anglePerFrame)
-                {
-                    anglePerFrame = remainingAngle;
-                    isRotating = false;
-                }
-                transform.Rotate(Vector3.up * anglePerFrame);
-
-                remainingAngle -= anglePerFrame;
-                remainingDuration -= Time.deltaTime;
-                yield return null;
-
+                isRotating = true;
+                remainingAngle = angle;
+                remainingDuration = duration;
             }
+
+        }
+        while (isRotating)
+        {
+            float anglePerFrame = (remainingAngle / remainingDuration) * Time.deltaTime; // 한프레임의 회전값
+            if (remainingAngle < anglePerFrame)
+            {
+                anglePerFrame = remainingAngle;
+                isRotating = false;
+            }
+            transform.Rotate(Vector3.up * anglePerFrame);
+
+            remainingAngle -= anglePerFrame;
+            remainingDuration -= Time.deltaTime;
+            yield return null;
+
         }
     }
 }
