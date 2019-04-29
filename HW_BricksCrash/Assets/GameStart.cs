@@ -19,6 +19,7 @@ public class GameStart : MonoBehaviour
             rb.isKinematic = false;
             rb.transform.parent = null;
             rb.AddForce(Vector3.up * 500f);
+            rb.AddForce(Vector3.right * 100f);
             enabled = false;
         }
     }

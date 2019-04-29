@@ -4,23 +4,21 @@ using UnityEngine;
 
 public class BarMove : MonoBehaviour
 {
-    public float speed = 10f;
-    public float h;
+    private float speed = 25f;
+    private float h;
+    Rigidbody rb;
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.transform.tag == "Wall")
-        {
-            h = 0;
-        }
-    }
 
     // Update is called once per frame
     void Update()
     {
-        h = Input.GetAxisRaw("Horizontal");
-        h *= speed * Time.deltaTime;
+        h = Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime;
+        //h *= speed * Time.deltaTime;
 
-        transform.Translate(Vector3.right * h);
+        //transform.Translate(Vector3.right * h);
+        //transform.Translate(h, 0, 0);
+        rb = GetComponent<Rigidbody>();
+        rb.MovePosition(transform.position + transform.right * h);
+
     }
 }
