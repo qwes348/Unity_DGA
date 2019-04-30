@@ -6,7 +6,6 @@ public class Jump_Pattern : MonoBehaviour
 {
     bool isMoving;
     Rigidbody rb;
-    int jumpCount = 0;
 
     void Start()
     {
@@ -26,18 +25,19 @@ public class Jump_Pattern : MonoBehaviour
         if (!isMoving)
         {
             isMoving = true;
-            rb.AddForce(Vector3.up * 300f);
+            rb.AddForce(Vector3.up * 300f);   // jump
             yield return new WaitForSeconds(1.5f);
 
-            rb.AddForce(Vector3.up * 300f);
+            rb.AddForce(Vector3.up * 300f);  // jump
             yield return new WaitForSeconds(1.5f);
 
             rb.maxAngularVelocity = 100f;
-            rb.AddForce(Vector3.up * 500f);
-            rb.angularVelocity = Vector3.up * 100f;
-            rb.angularDrag = 2;
+            rb.AddForce(Vector3.up * 500f);  // highJump
+            rb.angularVelocity = Vector3.up * 100f;  // rotate
+            rb.angularDrag = 2f;                     // break
         }
         yield return new WaitForSeconds(3f);
+        rb.angularDrag = 0.05f;
         isMoving = false;
     }
 

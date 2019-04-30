@@ -58,3 +58,7 @@ public class Selection_Co : MonoBehaviour
         }
     }
 }
+
+// StartRotate 코루틴과
+// RotateStage 코루틴을 따로짜서
+// Start코루틴이 RotateStage를 yield return하는게 더 좋은방법!!
