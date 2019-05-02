@@ -25,7 +25,8 @@ public class HealingZone : MonoBehaviour
     {
         if(collision.transform.tag == "Player")
         {
-            Instantiate(effect, collision.transform, false);
+            var particleInstance = Instantiate(effect, collision.transform, false);
+            Destroy(particleInstance, 2f);
         }
     }
 }
