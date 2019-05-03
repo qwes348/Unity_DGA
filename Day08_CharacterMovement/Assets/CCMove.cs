@@ -8,12 +8,19 @@ public class CCMove : MonoBehaviour
     public float jumpHeight = 2f;
     public LayerMask groundMask;
     public Transform groundChecker;
+    public float slideSpeed = 3f;
     Vector3 move;
 
     CharacterController cc;
     Vector3 velocity;
     [SerializeField]
     bool isGrounded = true;
+    [SerializeField]
+    bool onSlidingSlope = false;
+
+    Vector3 hitNormal;
+    Vector3 hitPoint;
+
 
     // Start is called before the first frame update
     void Start()
@@ -40,9 +47,20 @@ public class CCMove : MonoBehaviour
             velocity.y += Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y);  // 물리효과 직접구현 점프Velocity
 
         velocity.y += Physics.gravity.y * Time.deltaTime;  // 중력을 직접적용
-        cc.Move(velocity * Time.deltaTime);
+
+        onSlidingSlope = Vector3.Angle(Vector3.up, hitNormal) > cc.slopeLimit;
+        Vector3 slidieDirection = Vector3.zero;
+        if(onSlidingSlope)
+        {
+            Vector3 c = Vector3.Cross(hitNormal, Vector3.up);
+            slidieDirection = Vector3.Cross(hitNormal, c) * slideSpeed;
+            Debug.DrawRay(hitPoint, slidieDirection, Color.magenta, 1f);
+        }
+
+        cc.Move((velocity + slidieDirection) * Time.deltaTime);
     }
 
+    // Particle simulation
     // p(i+1) = p(i) + v(i+1) * dt
     // v(i+1) = v(i) + a(i+1) * dt
     // a(i+1) = F(i+1) /m    : F = m*a   =>  F = m*g
@@ -56,28 +74,25 @@ public class CCMove : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
+        hitNormal = hit.normal;
+        hitPoint = hit.point;
+
         var h = hit.gameObject.GetComponent<HealingPlatform>();
         if (h != null)
             GetComponent<HealOverTime>().Heal();
 
-        float ascentAngle = hit.transform.rotation.eulerAngles.x;
-        if (ascentAngle >= 180)
-            ascentAngle = Mathf.Abs(ascentAngle - 360);
+        // 숙제
+        //float ascentAngle = hit.transform.rotation.eulerAngles.x;
+        //if (ascentAngle >= 180)
+        //    ascentAngle = Mathf.Abs(ascentAngle - 360);
 
-        if (ascentAngle >= 45)
-        {
-            if (move == Vector3.zero)
-            {
-                print(hit.transform.name + hit.transform.rotation.eulerAngles.x);
-                transform.Translate(new Vector3(0f, -1f, -1f) * Time.deltaTime, Space.World);
-            }
-        }
+        //if (ascentAngle >= 45)
+        //{
+        //    if (move == Vector3.zero)
+        //    {                
+        //        transform.Translate(new Vector3(0f, -1f, -1f) * Time.deltaTime, Space.World);
+        //    }
+        //}
 
-    }
-    private void OnCollisionStay(Collision collision)
-    {
-        
-        //if (collision.transform.rotation.eulerAngles.x <= -45f)
-        //    print("true");
     }
 }
