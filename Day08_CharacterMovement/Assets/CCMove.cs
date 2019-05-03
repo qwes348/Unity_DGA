@@ -8,6 +8,7 @@ public class CCMove : MonoBehaviour
     public float jumpHeight = 2f;
     public LayerMask groundMask;
     public Transform groundChecker;
+    Vector3 move;
 
     CharacterController cc;
     Vector3 velocity;
@@ -27,7 +28,7 @@ public class CCMove : MonoBehaviour
         if (isGrounded && velocity.y < 0)
             velocity.y = 0f;
 
-        Vector3 move = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        move = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         move = move.normalized;
         cc.Move(move * moveSpeed * Time.deltaTime);
         // cc.Move == 한프레임당 변해야하는 양을넘겨서 이동해줌
@@ -58,5 +59,25 @@ public class CCMove : MonoBehaviour
         var h = hit.gameObject.GetComponent<HealingPlatform>();
         if (h != null)
             GetComponent<HealOverTime>().Heal();
+
+        float ascentAngle = hit.transform.rotation.eulerAngles.x;
+        if (ascentAngle >= 180)
+            ascentAngle = Mathf.Abs(ascentAngle - 360);
+
+        if (ascentAngle >= 45)
+        {
+            if (move == Vector3.zero)
+            {
+                print(hit.transform.name + hit.transform.rotation.eulerAngles.x);
+                transform.Translate(new Vector3(0f, -1f, -1f) * Time.deltaTime, Space.World);
+            }
+        }
+
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        
+        //if (collision.transform.rotation.eulerAngles.x <= -45f)
+        //    print("true");
     }
 }
