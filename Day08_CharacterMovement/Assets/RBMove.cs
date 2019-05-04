@@ -65,4 +65,16 @@ public class RBMove : MonoBehaviour
         Gizmos.DrawSphere(groundChecker.position, 0.5f);
 
     }
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    float ascentAngle = collision.transform.rotation.eulerAngles.x;
+    //    if (ascentAngle >= 180)
+    //        ascentAngle = Mathf.Abs(ascentAngle - 360);
+
+    //    if(ascentAngle < 44)
+    //    {
+    //        Physics.gravity = new Vector3(0f, 0f, 0f);
+    //    }
+    //}
 }
