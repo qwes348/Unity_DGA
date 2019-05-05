@@ -66,15 +66,17 @@ public class RBMove : MonoBehaviour
 
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    float ascentAngle = collision.transform.rotation.eulerAngles.x;
-    //    if (ascentAngle >= 180)
-    //        ascentAngle = Mathf.Abs(ascentAngle - 360);
-
-    //    if(ascentAngle < 44)
-    //    {
-    //        Physics.gravity = new Vector3(0f, 0f, 0f);
-    //    }
-    //}
+    private void OnCollisionStay(Collision collision)
+    {
+        float ascentAngle = Mathf.Abs(collision.transform.rotation.eulerAngles.x - 360);
+        //print(ascentAngle);
+        if(ascentAngle >= 30 && ascentAngle < 45)
+        {
+            rb.drag = 50;
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        rb.drag = 0;
+    }
 }
