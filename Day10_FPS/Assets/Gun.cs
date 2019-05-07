@@ -11,6 +11,9 @@ public class Gun : MonoBehaviour
     float nextTimeToFire = 0f;
     Vector3 originPos, smoothVel;
 
+    public GameObject shell;
+    public GameObject shell_hole;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +28,7 @@ public class Gun : MonoBehaviour
         {
             nextTimeToFire = Time.time + 1f / fireRate;   // 초당 10발을 쏠수있다
             Shoot();
+            ShellOut();
         }
         transform.localPosition = Vector3.SmoothDamp(transform.localPosition, originPos, ref smoothVel, 0.1f);  // lerp함수와 비슷, 스프링처럼 동작함
     }
@@ -49,6 +53,14 @@ public class Gun : MonoBehaviour
 
         // 반동구현
         transform.localPosition -= Vector3.forward * UnityEngine.Random.Range(0.07f, 0.3f);
+    }
+
+    private void ShellOut()
+    {
+        var _shell = Instantiate(shell, shell_hole.transform);
+        _shell.transform.parent = null;
+        _shell.GetComponent<Rigidbody>().AddForce(Vector3.right * 0.1f);
+        Destroy(_shell, 1f);
     }
 
     void OffFlashLight()
