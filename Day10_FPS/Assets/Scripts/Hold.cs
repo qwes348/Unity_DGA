@@ -29,7 +29,7 @@ public class Hold : MonoBehaviour
                     rb = hit.rigidbody;
                     coll = hit.collider;
                     rb.isKinematic = true;
-                    coll.isTrigger = true;
+                    //coll.isTrigger = true;                    
                     //hit.rigidbody.isKinematic = true;
                     //hit.collider.isTrigger = true;
                     hit.transform.parent = holdPoint;
@@ -39,15 +39,15 @@ public class Hold : MonoBehaviour
                 }
             }
         }
-        else if(Input.GetKeyDown(KeyCode.F) && holdPoint.childCount != 0)  // 던질때
+        else if(Input.GetKeyDown(KeyCode.F) && holdPoint.childCount == 1)  // 던질때
         {
             var item = holdPoint.GetChild(0);
             rb.isKinematic = false;
-            coll.isTrigger = false;
+            //coll.isTrigger = false;
             //item.GetComponent<Rigidbody>().isKinematic = false;
             //item.GetComponent<Collider>().isTrigger = false;
-            
-            item.GetComponent<Rigidbody>().AddForce(item.transform.forward * 400f);
+
+            item.GetComponent<Rigidbody>().AddForce(item.transform.forward * 500f);
             item.transform.parent = null;
             currentGun.SetActive(true);
         }
