@@ -62,7 +62,15 @@ public class Gun : MonoBehaviour
             {
                 hit.rigidbody.AddForce(fpsCamera.transform.forward * 500f);
             }
+            var bs = hit.transform.GetComponent<BulletSound>();
+            if (bs != null)
+                bs.Play();
+            var brs = hit.transform.GetComponent<BulletRandomSound>();
+            if (brs != null)
+                brs.Play();
         }
+
+        GetComponent<AudioSource>().Play();
 
         GameObject fx = Instantiate(impactFX, hit.point, Quaternion.identity);
         Destroy(fx, 0.3f);
