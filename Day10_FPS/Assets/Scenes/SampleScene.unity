@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2364,6 +2364,11 @@ MonoBehaviour:
     type: 3}
   bulletHolePrefab: {fileID: 8560793700449495799, guid: d7065a4bb9308494384a631b7b28e354,
     type: 3}
+  maxBullets: 10
+  clips:
+  - {fileID: 8300000, guid: f2d0c834a2503934394140549b6f0984, type: 3}
+  - {fileID: 8300000, guid: e7632c6401c09437e83de45d33c5858e, type: 3}
+  - {fileID: 8300000, guid: 3c5c1d4d7b9307c458890a4beb12e4ae, type: 3}
 --- !u!1 &1287106932
 GameObject:
   m_ObjectHideFlags: 0
@@ -4720,7 +4725,7 @@ Animator:
   m_GameObject: {fileID: 8296172667999854074}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 46788ac85c575b94e91435234fcccb37, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 29f2a7b8be3df084fb3bbc0bfecb1a69, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4745,7 +4750,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8296172667999854074}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.299, y: -0.257, z: 0.66}
+  m_LocalPosition: {x: 0.299, y: -0.257, z: 0.643}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children:
   - {fileID: 5978402624568128665}

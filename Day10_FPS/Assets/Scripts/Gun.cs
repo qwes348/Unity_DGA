@@ -12,6 +12,13 @@ public class Gun : MonoBehaviour
     public Transform shellEjection;
     public GameObject impactFX;
     public GameObject bulletHolePrefab;
+    public int maxBullets;
+    public AudioClip[] clips;
+
+    AudioSource audiosource;
+    private bool isReloading = false;
+    private int currentBullets;
+    Animator gunAnim;
 
     Camera fpsCamera;
     float nextTimeToFire = 0f;
@@ -25,28 +32,48 @@ public class Gun : MonoBehaviour
     {
         fpsCamera = GetComponentInParent<Camera>();
         originPos = transform.localPosition;
+        gunAnim = GetComponent<Animator>();
+        currentBullets = maxBullets;
+        audiosource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        fpsCamera.transform.localRotation *= Quaternion.Euler(Vector3.left * recoilAngle);
-
-        if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
+        if(currentBullets > 0 && !isReloading)
         {
-            nextTimeToFire = Time.time + 1f / fireRate;   // 초당 10발을 쏠수있다
-            Shoot();
-            //ShellOut();
+            fpsCamera.transform.localRotation *= Quaternion.Euler(Vector3.left * recoilAngle);
+
+            if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
+            {
+                nextTimeToFire = Time.time + 1f / fireRate;   // 초당 10발을 쏠수있다
+                Shoot();
+                //ShellOut();
+            }
+            // kick damping
+            transform.localPosition = Vector3.SmoothDamp(transform.localPosition, originPos, ref smoothVel, 0.1f);  // lerp함수와 비슷, 스프링처럼 동작함
+
+            // recoil damping
+            recoilAngle = Mathf.SmoothDamp(recoilAngle, 0, ref recoilVel, 0.2f);
         }
-        // kick damping
-        transform.localPosition = Vector3.SmoothDamp(transform.localPosition, originPos, ref smoothVel, 0.1f);  // lerp함수와 비슷, 스프링처럼 동작함
-        
-        // recoil damping
-        recoilAngle = Mathf.SmoothDamp(recoilAngle, 0, ref recoilVel, 0.2f);        
+        if(currentBullets == 0 && !isReloading)
+        {
+            if(Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
+            {
+                audiosource.clip = clips[1];
+                nextTimeToFire = Time.time + 1f / fireRate; 
+                audiosource.Play();
+            }
+        }
+        if(Input.GetKeyDown(KeyCode.R) && !isReloading)
+        {
+            StartCoroutine(Reloading());
+        }
     }
 
     private void Shoot()
     {
+        currentBullets--;
         // 총구화염
         muzzleFlash.enabled = true;
         Invoke("OffFlashLight", 0.05f);  // 코루틴없이 시간을주는 Invoke
@@ -70,7 +97,9 @@ public class Gun : MonoBehaviour
                 brs.Play();
         }
 
-        GetComponent<AudioSource>().Play();
+        audiosource.clip = clips[0];
+        //GetComponent<AudioSource>().Play();
+        audiosource.Play();
 
         GameObject fx = Instantiate(impactFX, hit.point, Quaternion.identity);
         Destroy(fx, 0.3f);
@@ -109,5 +138,19 @@ public class Gun : MonoBehaviour
     void OffFlashLight()
     {
         muzzleFlash.enabled = false;
+    }
+
+    IEnumerator Reloading()
+    {
+        isReloading = true;
+        currentBullets = maxBullets;
+        //gunAnim.SetBool("isReloading", true);
+        gunAnim.SetTrigger("isReloading");
+        audiosource.clip = clips[2];
+        audiosource.Play();
+        yield return new WaitForSeconds(1f);
+        isReloading = false;
+        //gunAnim.SetBool("isReloading", false);
+        
     }
 }
