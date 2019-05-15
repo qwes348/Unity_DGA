@@ -27,7 +27,7 @@ public class Attack : MonoBehaviour
 
     IEnumerator Attacking()
     {
-        anim.SetTrigger("Attack");
+        anim.SetTrigger("OnAttack");
         isAttacking = true;
         yield return new WaitForSeconds(0.5f);
         isAttacking = false;

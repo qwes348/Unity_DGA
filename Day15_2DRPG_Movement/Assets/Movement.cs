@@ -42,13 +42,13 @@ public class Movement : MonoBehaviour
         {
             anim.SetFloat("LastDirX", lastX);
             anim.SetFloat("LastDirY", lastY);
-            anim.SetBool("Movement", false);
+            anim.SetBool("OnMove", false);
         }
         else
         {
             lastX = heading.x;
             lastY = heading.y;
-            anim.SetBool("Movement", true);
+            anim.SetBool("OnMove", true);
         }
         if (heading != Vector3.zero)
         {
