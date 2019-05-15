@@ -14,7 +14,7 @@ public class DOTweenTest : MonoBehaviour
         //transform.DOJump(new Vector3(3, 0, 0), 3f, 1, 1f);
         //transform.DOMoveX(5f, 2f);
         /*transform.DOMoveX(5f, 2f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.Linear);*/  // 등속Ver.
-        //transform.DOMoveX(5f, 2f).SetLoops(-1, LoopType.Restart).SetEase(Ease.OutElastic);
+        transform.DOMoveX(5f, 2f).SetLoops(-1, LoopType.Restart).SetEase(Ease.OutElastic);
         //GetComponent<MeshRenderer>().material.DOColor(Color.magenta, 1f);
         //GetComponent<MeshRenderer>().material.DOColor(Color.magenta, 1f).SetLoops(-1, LoopType.Yoyo);
     }
