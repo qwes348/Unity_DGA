@@ -2,26 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AxeLocomotionBT : StateMachineBehaviour
+public class DisarmAxe : StateMachineBehaviour
 {
-    public float moveSpeed = 3f;
     PlayerController pc;
+    Transform weaponHolder;
 
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        pc = animator.GetComponent<PlayerController>();   // animator를 가지고있는 게임오브젝트의 PlayerController를 가져올수있다.
-        pc.moveSpeed = moveSpeed;
+        pc = animator.GetComponent<PlayerController>();
+        weaponHolder = pc.weaponHolder;
     }
 
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        pc.FrameMove();
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if(stateInfo.normalizedTime > 0.35)
         {
-            animator.SetTrigger("DisarmAxe");
-
+            GameObject Weapon = weaponHolder.GetChild(0).gameObject;
+            Weapon.SetActive(false);
         }
     }
 

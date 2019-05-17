@@ -23,6 +23,10 @@ public class NoWeaponLocomotionBT : StateMachineBehaviour
             if(pc.GetNearestWeaponIn(radius: 1.5f, angle: 180f, weaponTag: "RightWeapon") != null)
                 animator.SetTrigger("PickUpWeapon");
         }
+        if(Input.GetKeyDown(KeyCode.Alpha1) && pc.weaponHolder.childCount != 0)
+        {
+            animator.SetTrigger("EquipAxe");
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
