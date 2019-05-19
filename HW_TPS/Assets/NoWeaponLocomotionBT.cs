@@ -23,11 +23,11 @@ public class NoWeaponLocomotionBT : StateMachineBehaviour
             if(pc.GetNearestWeaponIn(radius: 1.5f, angle: 180f, weaponTag: "RightWeapon") != null)
                 animator.SetTrigger("PickUpWeapon");
         }
-        if(Input.GetKeyDown(KeyCode.Alpha1) && pc.weaponHolder.childCount != 0)
+        if(Input.GetKeyDown(KeyCode.Alpha1) && pc.disarmHolder.childCount != 0)
         {
             animator.SetTrigger("EquipAxe");
         }
-        if (Input.GetMouseButtonDown(0) && pc.weaponHolder.childCount != 0)
+        if (Input.GetMouseButtonDown(0) && pc.disarmHolder.childCount != 0)
         {
             animator.SetTrigger("OnBaldoAttack");
         }

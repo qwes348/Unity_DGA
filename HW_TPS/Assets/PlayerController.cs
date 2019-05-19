@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundMask;
     public Transform groundChecker;
     public Transform weaponHolder;
+    public Transform disarmHolder;
     [HideInInspector]
     public Vector3 moveDirection = Vector3.zero;
 

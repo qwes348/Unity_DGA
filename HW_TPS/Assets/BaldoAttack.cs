@@ -6,13 +6,16 @@ public class BaldoAttack : StateMachineBehaviour
 {
     PlayerController pc;
     Transform weaponHolder;
+    Transform disarmHolder;
+    GameObject weapon;
 
     //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         pc = animator.GetComponent<PlayerController>();
         weaponHolder = pc.weaponHolder;
-
+        disarmHolder = pc.disarmHolder;
+        weapon = disarmHolder.GetChild(0).gameObject;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -20,8 +23,11 @@ public class BaldoAttack : StateMachineBehaviour
     {
         if (stateInfo.normalizedTime > 0.4)
         {
-            GameObject Weapon = weaponHolder.GetChild(0).gameObject;
-            Weapon.SetActive(true);
+            //GameObject Weapon = weaponHolder.GetChild(0).gameObject;
+            //Weapon.SetActive(true);
+            weapon.transform.SetParent(weaponHolder);
+            weapon.transform.localPosition = Vector3.zero;
+            weapon.transform.localRotation = Quaternion.identity;
         }
     }
 
