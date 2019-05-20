@@ -27,7 +27,7 @@ public class AxeLocomotionBT : StateMachineBehaviour
         {
             animator.SetTrigger("ThrowingWeapon");
         }
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !animator.IsInTransition(0))
         {
             animator.SetTrigger("OnAttack1");
         }

@@ -10,7 +10,7 @@ public class NoWeaponLocomotionBT : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        pc = animator.GetComponent<PlayerController>();   // animator를 가지고있는 게임오브젝트의 PlayerController를 가져올수있다.
+        pc = animator.GetComponent<PlayerController>();
         pc.moveSpeed = moveSpeed;
     }
 
@@ -18,14 +18,14 @@ public class NoWeaponLocomotionBT : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         pc.FrameMove();
-        if (Input.GetKeyDown(KeyCode.E))
+
+        if (Input.GetKeyDown(KeyCode.E) && !pc.isEquipped && !animator.IsInTransition(0))  // 세번째 파라미터는 트랜지션구간에 실행안하게 하기위한 부분
         {
-            if(pc.GetNearestWeaponIn(radius: 1.5f, angle: 180f, weaponTag: "RightWeapon") != null)
-                animator.SetTrigger("PickUpWeapon");
+            animator.SetTrigger("PickupWeapon");
         }
-        if(Input.GetKeyDown(KeyCode.Alpha1) && pc.weaponHolder.childCount != 0)
+        if(Input.GetKeyDown(KeyCode.X) && pc.isDisarmed && !pc.isEquipped && !animator.IsInTransition(0))
         {
-            animator.SetTrigger("EquipAxe");
+            animator.SetTrigger("Equip");
         }
     }
 

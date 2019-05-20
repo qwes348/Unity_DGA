@@ -10,7 +10,7 @@ public class AxeLocomotionBT : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        pc = animator.GetComponent<PlayerController>();   // animator를 가지고있는 게임오브젝트의 PlayerController를 가져올수있다.
+        pc = animator.GetComponent<PlayerController>();
         pc.moveSpeed = moveSpeed;
     }
 
@@ -18,10 +18,17 @@ public class AxeLocomotionBT : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         pc.FrameMove();
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            animator.SetTrigger("DisarmAxe");
 
+        if (Input.GetKeyDown(KeyCode.C) && !animator.IsInTransition(0))
+            animator.SetTrigger("ComboAttack");
+
+        if (Input.GetKeyDown(KeyCode.E) && pc.isEquipped && !animator.IsInTransition(0))
+        {
+            animator.SetTrigger("DropWeapon");
+        }
+        if (Input.GetKeyDown(KeyCode.X) && pc.isEquipped && !pc.isDisarmed && !animator.IsInTransition(0))
+        {
+            animator.SetTrigger("Disarm");
         }
     }
 

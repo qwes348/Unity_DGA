@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundMask;
     public Transform groundChecker;
     public Transform weaponHolder;
+    public Transform weaponDisarmHolder;
 
     Rigidbody rb;
     bool isGrounded = false;
@@ -20,6 +22,22 @@ public class PlayerController : MonoBehaviour
 
     MouseLook mouseLook;
     Animator anim;
+
+    public bool isEquipped
+    {
+        get
+        {
+            return weaponHolder != null && weaponHolder.childCount != 0;
+        }
+    }
+
+    public bool isDisarmed
+    {
+        get
+        {
+            return weaponDisarmHolder != null && weaponDisarmHolder.childCount != 0;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -32,9 +50,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     public void FrameMove()
     {
-        isGrounded = Physics.SphereCast(groundChecker.position, 0.2f, -transform.up, out hit, 0.2f, groundMask, QueryTriggerInteraction.Ignore);
-
-        if(Input.GetButtonDown("Jump") && isGrounded)
+        isGrounded = Physics.SphereCast(groundChecker.position,
+                                        0.2f,
+                                        -transform.up,
+                                        out hit,
+                                        0.2f,
+                                        groundMask,
+                                        QueryTriggerInteraction.Ignore);
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             Jump(jumpHeight);
         }
@@ -42,28 +65,26 @@ public class PlayerController : MonoBehaviour
         float v = Input.GetAxis("Vertical");
         float mouseMoveX = Input.GetAxis("Mouse X");
 
-        if(Input.GetMouseButtonDown(1)) // 우클릭 을 누르면 카메라가 바라보는 방향으로 캐릭터 회전
+        if (Input.GetMouseButtonDown(1))
         {
-            // 캐릭터가 바라보는 방향에서 카메라가 바라보는 방향으로 y값만 회전
             transform.Rotate(Vector3.up * Quaternion.FromToRotation(transform.forward, mouseLook.target.forward).eulerAngles.y);
-            // 카메라도 같이 이동하기때문에 이상해지므로 Reset해줌
             mouseLook.ResetCamera();
         }
 
-        if(Input.GetMouseButton(1)) // 우클릭 하고있을때는 원하는방향 바로이동
+        if (Input.GetMouseButton(1))
         {
-            moveDirection = (new Vector3(h, 0, v).normalized);
+            moveDirection = (new Vector3(h, 0, v)).normalized;
             float rotationY = mouseMoveX * rotationSpeed * Time.deltaTime;
             transform.Rotate(Vector3.up, rotationY);
         }
-        else // 아무것도 안누를때 일반 이동
+        else
         {
-            moveDirection = (new Vector3(0, 0, v).normalized);
+            moveDirection = (new Vector3(0, 0, v)).normalized;
             float rotationY = h * rotationSpeed * Time.deltaTime;
             transform.Rotate(Vector3.up, rotationY);
         }
 
-        moveDirection = transform.TransformDirection(moveDirection);  // 중요 방향을 로컬 => 월드로 변환해준다         
+        moveDirection = transform.TransformDirection(moveDirection);
         moveDirection *= moveSpeed;
 
         anim.SetFloat("h", h);
@@ -74,13 +95,14 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 move = moveDirection * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + move);
+        moveDirection = Vector3.zero;
     }
 
     private void Jump(float jumpHeight)
     {
         rb.drag = 0;
         rb.velocity = Vector3.zero;
-        rb.AddForce(Vector3.up * Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);  // 이왕이면 외우기
+        rb.AddForce(Vector3.up * Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
     }
 
     private void OnDrawGizmos()
@@ -99,6 +121,7 @@ public class PlayerController : MonoBehaviour
         else
             rb.drag = 0;
     }
+
     private void OnCollisionExit(Collision collision)
     {
         rb.drag = 0;
@@ -118,4 +141,23 @@ public class PlayerController : MonoBehaviour
             return null;
         return list[index];
     }
+
+    void Disarm()
+    {
+        if (isEquipped)
+        {
+            Transform weapon = weaponHolder.GetChild(0);
+            weapon.SetParent(weaponDisarmHolder);
+            anim.SetInteger("HoldingWeaponId", 0);
+        }
+    }
+    void Equip()
+    {
+        if(isDisarmed)
+        {
+            Transform weapon = weaponDisarmHolder.GetChild(0);
+            weapon.SetParent(weaponHolder);
+            anim.SetInteger("HoldingWeaponId", weapon.GetComponent<WeaponType>().weaponId);
+        }
+    }   
 }

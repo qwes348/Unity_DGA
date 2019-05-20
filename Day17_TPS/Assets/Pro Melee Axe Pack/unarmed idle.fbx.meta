@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 7f200205b3649444eae933c74f0d90ba
+guid: aa1099e9ab3ed624aa2615ac7bfd47dd
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: UnarmedIdle
+    second: Unarmed Idle
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -35,7 +35,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: UnarmedIdle
+      name: Unarmed Idle
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
@@ -954,7 +954,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 5995635a45cf5f74484e71605317113e,
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 04970f493ddc7c44aaa31b6b57d8bb23,
     type: 3}
   animationType: 3
   humanoidOversampling: 1

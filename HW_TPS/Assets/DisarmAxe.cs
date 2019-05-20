@@ -21,13 +21,12 @@ public class DisarmAxe : StateMachineBehaviour
     //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(stateInfo.normalizedTime > 0.35)
+        if(stateInfo.normalizedTime > 0.4 && !animator.IsInTransition(0))
         {            
             //Weapon.SetActive(false);
             weapon.transform.SetParent(disarmHolder);
             weapon.transform.localPosition = Vector3.zero;
             weapon.transform.localRotation = Quaternion.Euler(90f, 180f, 0f);
-            
         }
     }
 

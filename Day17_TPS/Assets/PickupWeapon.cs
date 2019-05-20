@@ -17,8 +17,7 @@ public class PickupWeapon : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // normalizedTime > 0.2  => 해당스테이트에 들어가고 20퍼센트가 지났을시점!! 자연스럽게 줍기위해 추가
-        if (weaponHolder.childCount == 0 && stateInfo.normalizedTime > 0.25)  
+        if (weaponHolder.childCount == 0 && stateInfo.normalizedTime > 0.22f)
         {
             GameObject weapon = pc.GetNearestWeaponIn(radius: 1.5f, angle: 180f, weaponTag: "RightWeapon");
             if (weapon == null)
@@ -29,7 +28,8 @@ public class PickupWeapon : StateMachineBehaviour
                 c.enabled = false;
             weapon.transform.SetParent(weaponHolder);
             weapon.transform.localPosition = Vector3.zero;
-            weapon.transform.localRotation = Quaternion.identity;            
+            weapon.transform.localRotation = Quaternion.identity;
+            animator.SetInteger("HoldingWeaponId", weapon.GetComponent<WeaponType>().weaponId);
         }
     }
 

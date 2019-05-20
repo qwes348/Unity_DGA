@@ -1,17 +1,17 @@
 fileFormatVersion: 2
-guid: 75cc5511f628bbc459e8ca3b3488b34b
+guid: b37ce7f4ac1eefd48be67ea573318d43
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: ForWardRun
+    second: Forward Run
   - first:
       74: 4061839508520268033
-    second: LeftRun
+    second: Left Run
   - first:
       74: -3780516532778130023
-    second: RigtRun
+    second: Right Run
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -41,7 +41,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: ForWardRun
+      name: Forward Run
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
@@ -70,7 +70,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: LeftRun
+      name: Left Run
       takeName: mixamo.com
       internalID: 4061839508520268033
       firstFrame: 0
@@ -99,7 +99,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: RigtRun
+      name: Right Run
       takeName: mixamo.com
       internalID: -3780516532778130023
       firstFrame: 0
@@ -1018,7 +1018,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 5995635a45cf5f74484e71605317113e,
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 04970f493ddc7c44aaa31b6b57d8bb23,
     type: 3}
   animationType: 3
   humanoidOversampling: 1
