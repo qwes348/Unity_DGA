@@ -20,15 +20,22 @@ public class NoWeaponLocomotionBT : StateMachineBehaviour
         pc.FrameMove();
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if(pc.GetNearestWeaponIn(radius: 1.5f, angle: 180f, weaponTag: "RightWeapon") != null)
+            if(pc.GetNearestWeaponIn(radius: 1.5f, angle: 180f, weaponTag: "RightWeapon") != null
+                || pc.GetNearestWeaponIn(radius: 1.5f, angle: 180f, weaponTag: "TwohandWeapon") != null)
                 animator.SetTrigger("PickUpWeapon");
+            //if (pc.GetNearestWeaponIn(radius: 1.5f, angle: 180f, weaponTag: "TwohandWeapon") != null)
+            //    animator.SetTrigger("PickUpSword");
         }
         if(Input.GetKeyDown(KeyCode.Alpha1) && pc.disarmHolder.childCount != 0)
         {
-            animator.SetTrigger("EquipAxe");
+            if(pc.disarmHolder.GetChild(0).tag == "RightWeapon")
+                animator.SetTrigger("EquipAxe");
+            if (pc.disarmHolder.GetChild(0).tag == "TwohandWeapon")
+                animator.SetTrigger("EquipSword");
         }
         if (Input.GetMouseButtonDown(0) && pc.disarmHolder.childCount != 0)
         {
+            GameObject weapon = pc.disarmHolder.GetChild(0).gameObject;
             animator.SetTrigger("OnBaldoAttack");
         }
     }

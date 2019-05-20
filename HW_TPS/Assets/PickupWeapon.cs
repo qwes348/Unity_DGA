@@ -6,6 +6,7 @@ public class PickupWeapon : StateMachineBehaviour
 {
     PlayerController pc;
     Transform weaponHolder;
+    GameObject weapon;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -20,9 +21,20 @@ public class PickupWeapon : StateMachineBehaviour
         // normalizedTime > 0.2  => 해당스테이트에 들어가고 20퍼센트가 지났을시점!! 자연스럽게 줍기위해 추가
         if (weaponHolder.childCount == 0 && stateInfo.normalizedTime > 0.25)  
         {
-            GameObject weapon = pc.GetNearestWeaponIn(radius: 1.5f, angle: 180f, weaponTag: "RightWeapon");
+            //GameObject weapon = pc.GetNearestWeaponIn(radius: 1.5f, angle: 180f, weaponTag: "TwohandWeapon");
+            if (pc.GetNearestWeaponIn(radius: 1.5f, angle: 180f, weaponTag: "RightWeapon") != null)
+            {
+                weapon = pc.GetNearestWeaponIn(radius: 1.5f, angle: 180f, weaponTag: "RightWeapon");
+                animator.SetInteger("WeaponType", weapon.GetComponent<WeaponType>().weaponId);
+            }
+            else if (pc.GetNearestWeaponIn(radius: 1.5f, angle: 180f, weaponTag: "TwohandWeapon") != null)
+            {
+                weapon = pc.GetNearestWeaponIn(radius: 1.5f, angle: 180f, weaponTag: "TwohandWeapon");
+                animator.SetInteger("WeaponType", weapon.GetComponent<WeaponType>().weaponId);
+            }
             if (weapon == null)
                 return;
+
             weapon.GetComponent<Rigidbody>().isKinematic = true;
             Collider[] colliders = weapon.GetComponents<Collider>();
             foreach (var c in colliders)
