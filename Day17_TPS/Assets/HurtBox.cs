@@ -37,7 +37,7 @@ public class HurtBox : MonoBehaviour
     public void GetHitBy(int damage)
     {
         state = ColliderState.Colliding;
-        Invoke("ResetState", 031f);
+        Invoke("ResetState", 0.1f);
 
     }
 

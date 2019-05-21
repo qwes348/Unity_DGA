@@ -29,10 +29,12 @@ public class HitBox : MonoBehaviour
 
     List<Collider> colliderList;
     IHitBoxResponder responder = null;
+    List<Collider> overlapChecker = null;
 
     private void Awake()
     {
         colliderList = new List<Collider>();
+        overlapChecker = new List<Collider>();
     }
     private void OnDrawGizmos()
     {
@@ -83,10 +85,11 @@ public class HitBox : MonoBehaviour
         if (colliderList == null)
         {
             colliderList = new List<Collider>();
+            overlapChecker = new List<Collider>();
             return;
         }
 
-        colliderList.Clear();
+        colliderList.Clear();        
 
         if (state == ColliderState.Closed)
             return;
@@ -113,12 +116,17 @@ public class HitBox : MonoBehaviour
         }
         foreach (var c in colliderList)
         {
+            if (overlapChecker != null && overlapChecker.Contains(c))
+            {
+                continue;
+            }
+            overlapChecker.Add(c);
             // C# 6.0 문법 아래 코멘트랑 똑같은 뜻이다
             responder?.CollisionWith(c);
             //if (responder != null)
             //    responder.CollisionWith(c);
-            print("colliding: " + c.name);                      
-            
+            print("colliding: " + c.name);
+
         }
         state = colliderList.Count > 0 ? ColliderState.Colliding : ColliderState.Open;
     }
@@ -131,6 +139,7 @@ public class HitBox : MonoBehaviour
     public void StopCheckingCollision()
     {
         state = ColliderState.Closed;
+        overlapChecker.Clear();
     }
 
     public void SetResponder(IHitBoxResponder responder)
