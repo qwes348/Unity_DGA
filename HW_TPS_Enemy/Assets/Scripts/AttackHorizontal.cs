@@ -49,7 +49,9 @@ public class AttackHorizontal : StateMachineBehaviour, IHitBoxResponder
         Debug.DrawLine(hitPoint, hitPoint + hitNormal, Color.magenta, 2f);
         Debug.DrawLine(hitPoint, hitPoint + hitDirection, Color.cyan, 2f);
         BoxHitReaction hr = collider.GetComponentInParent<BoxHitReaction>();
+        CreatureHitReaction cr = collider.GetComponentInParent<CreatureHitReaction>();
         hr?.Hurt(damage, hitPoint, hitNormal, hitDirection);
+        cr?.Hurt(damage, hitPoint, hitNormal, hitDirection);
     }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
