@@ -5,49 +5,30 @@ using UnityEngine;
 public class AttackHorizontal : StateMachineBehaviour, IHitBoxResponder
 {
     public int damage = 5;
+    public bool enabledMultipleHits = false;
+
     HitBox hitBox;
     Dictionary<int, int> hitObjects;
 
-    public void CollisionWith(Collider collider)
+    public void CollisionWith(Collider collider, HitBox hitbox)
     {
         HurtBox hurtBox = collider.GetComponent<HurtBox>();
         //Debug.Log("Hit: " + collider.name);   
 
-        int id = collider.transform.root.gameObject.GetInstanceID();
-        if (!hitObjects.ContainsKey(id))
-            hitObjects[id] = 1;
-        else
-        {
-            hitObjects[id] += 1; 
-            return;    // 다단히트를 결정짓는부분 return이 없으면 다단히트들어감
-        }
 
+        // hitpoint를 계산하는 부분
         hurtBox.GetHitBy(damage);   // debugging
-        //collider.GetComponentInParent<Health>().DecreaseHP(damage);
-        Vector3 cameraTargetPosition = hitBox.transform.root.Find("CameraTarget").transform.position;
-        RaycastHit hit;
-        Vector3 hitPoint = collider.transform.position;
-        Vector3 hitNormal = cameraTargetPosition - hitPoint;
-        hitNormal = hitNormal.normalized;
-        Vector3 hitDirection = -hitNormal;
-        if(Physics.Raycast(cameraTargetPosition,
-                            hitDirection,
-                            out hit,
-                            2f,
-                            1 << LayerMask.NameToLayer("HurtBox"),  // bit 쉬프트연산
-                            //1024, // == 위와같음
-                            QueryTriggerInteraction.Collide))
-        {
-            hitPoint = hit.point;
-            hitNormal = hit.normal;
-            hitDirection = hitPoint - cameraTargetPosition;
-            hitDirection = hitDirection.normalized;
-        }
 
-        Debug.Log("1Hit " + collider.name);
-        Debug.DrawLine(cameraTargetPosition, hitPoint, Color.yellow, 2f);
-        Debug.DrawLine(hitPoint, hitPoint + hitNormal, Color.magenta, 2f);
-        Debug.DrawLine(hitPoint, hitPoint + hitDirection, Color.cyan, 2f);
+        Vector3 cameraTargetPosition = hitBox.transform.root.Find("CameraTarget").transform.position;
+        Vector3 hitPoint;
+        Vector3 hitNormal;
+        Vector3 hitDirection;
+
+        hitBox.GetContactInfo(from: cameraTargetPosition, 
+                       to: collider.transform.root.transform.position,
+                       out hitPoint, out hitNormal, out hitDirection,
+                       2f);
+
         BoxHitReaction hr = collider.GetComponentInParent<BoxHitReaction>();
         hr?.Hurt(damage, hitPoint, hitNormal, hitDirection);
     }
@@ -57,6 +38,7 @@ public class AttackHorizontal : StateMachineBehaviour, IHitBoxResponder
     {
         hitBox = animator.GetComponent<PlayerController>().weaponHolder.GetComponentInChildren<HitBox>();
         hitBox.SetResponder(this);
+        hitBox.enabledMultipleHit = this.enabledMultipleHits;
         hitBox.StartCheckingCollision();
         hitObjects = new Dictionary<int, int>();
     }
@@ -66,12 +48,15 @@ public class AttackHorizontal : StateMachineBehaviour, IHitBoxResponder
     {
         if(0.35f <= stateInfo.normalizedTime && stateInfo.normalizedTime <= 0.45f)  // 타격타이밍 맞추기
             hitBox.UpdateHitBox();
+        if (Input.GetKeyDown(KeyCode.C) && stateInfo.normalizedTime >= 0.5f)
+            animator.SetTrigger("ComboAttack");
     }
 
     //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        hitBox.StopCheckingCollision();
+        //hitBox.StopCheckingCollision();
+        animator.SetBool("ComboAttack", false);
     }
 
 

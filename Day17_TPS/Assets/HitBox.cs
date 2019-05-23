@@ -12,7 +12,7 @@ public enum ColliderState
 
 public interface IHitBoxResponder
 {
-    void CollisionWith(Collider collider);
+    void CollisionWith(Collider collider, HitBox hitBox);
 }
 
 public class HitBox : MonoBehaviour
@@ -29,12 +29,17 @@ public class HitBox : MonoBehaviour
 
     List<Collider> colliderList;
     IHitBoxResponder responder = null;
+    Dictionary<int, int> hitObjects;
+
+    public bool enabledMultipleHit { get; set; }
+
     //List<Collider> overlapChecker = null;
 
     private void Awake()
     {
         colliderList = new List<Collider>();
         //overlapChecker = new List<Collider>();
+        hitObjects = new Dictionary<int, int>();
     }
     private void OnDrawGizmos()
     {
@@ -62,6 +67,28 @@ public class HitBox : MonoBehaviour
                 Gizmos.DrawSphere(sc.center, sc.radius);
             }
         }
+    }
+
+    public void GetContactInfo(Vector3 from, Vector3 to, out Vector3 hitPoint, out Vector3 hitNormal, out Vector3 hitDirection, float maxDistance)
+    {
+        RaycastHit hit;
+        hitPoint = to;
+        hitNormal = from - hitPoint;
+        hitNormal = hitNormal.normalized;
+        hitDirection = -hitNormal;
+        if (Physics.Raycast(from,
+                            hitDirection,
+                            out hit,
+                            maxDistance,
+                            mask,                                                                   
+                            QueryTriggerInteraction.Collide))
+        {
+            hitPoint = hit.point;
+            hitNormal = hit.normal;
+        }
+        Debug.DrawLine(from, hitPoint, Color.yellow, 2f);
+        Debug.DrawLine(hitPoint, hitPoint + hitNormal, Color.magenta, 2f);
+        Debug.DrawLine(hitPoint, hitPoint + hitDirection, Color.cyan, 2f);
     }
 
     private void CheckGizmoColor()
@@ -116,11 +143,17 @@ public class HitBox : MonoBehaviour
         }
         foreach (var c in colliderList)
         {
-            //if (overlapChecker != null && overlapChecker.Contains(c))
-            //    continue;
-            //overlapChecker.Add(c);  ////HW
+            int id = c.transform.root.gameObject.GetInstanceID();
+            if (!hitObjects.ContainsKey(id))
+                hitObjects[id] = 1;
+            else
+            {
+                hitObjects[id] += 1;
+                if(!enabledMultipleHit)
+                    continue;    // 다단히트를 결정짓는부분 return이 없으면 다단히트들어감
+            }
             // C# 6.0 문법 아래 코멘트랑 똑같은 뜻이다
-            responder?.CollisionWith(c);
+            responder?.CollisionWith(c, this);
             //if (responder != null)
             //    responder.CollisionWith(c);            
 
@@ -131,6 +164,7 @@ public class HitBox : MonoBehaviour
     public void StartCheckingCollision()
     {
         state = ColliderState.Open;
+        hitObjects.Clear();
     }
 
     public void StopCheckingCollision()

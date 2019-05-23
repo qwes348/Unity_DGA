@@ -26,7 +26,7 @@ public class AttackHorizontal_HW : StateMachineBehaviour, IHitBoxResponder
         hitbox.StopCheckingCollision();
     }
 
-    public void CollisionWith(Collider collider)
+    public void CollisionWith(Collider collider, HitBox hitBox)
     {
         collider.transform.parent.GetComponent<Rigidbody>().AddForce(collider.transform.forward * 50f);
     }

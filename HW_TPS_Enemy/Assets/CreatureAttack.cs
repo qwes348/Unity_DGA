@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackHorizontal : StateMachineBehaviour, IHitBoxResponder
+public class CreatureAttack : StateMachineBehaviour, IHitBoxResponder
 {
     public int damage = 5;
     public bool enabledMultipleHits = false;
@@ -12,6 +12,7 @@ public class AttackHorizontal : StateMachineBehaviour, IHitBoxResponder
 
     public void CollisionWith(Collider collider, HitBox hitbox)
     {
+        Debug.Log("A");
         HurtBox hurtBox = collider.GetComponent<HurtBox>();
         //Debug.Log("Hit: " + collider.name);   
 
@@ -19,12 +20,12 @@ public class AttackHorizontal : StateMachineBehaviour, IHitBoxResponder
         // hitpoint를 계산하는 부분
         hurtBox.GetHitBy(damage);   // debugging
 
-        Vector3 cameraTargetPosition = hitBox.transform.root.Find("CameraTarget").transform.position;
+        Vector3 targetHitChecker = hitBox.transform.root.Find("TargetHitChecker").transform.position;
         Vector3 hitPoint;
         Vector3 hitNormal;
         Vector3 hitDirection;
 
-        hitBox.GetContactInfo(from: cameraTargetPosition,
+        hitBox.GetContactInfo(from: targetHitChecker,
                        to: collider.transform.root.transform.position,
                        out hitPoint, out hitNormal, out hitDirection,
                        2f);
@@ -38,7 +39,7 @@ public class AttackHorizontal : StateMachineBehaviour, IHitBoxResponder
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        hitBox = animator.GetComponent<PlayerController>().weaponHolder.GetComponentInChildren<HitBox>();
+        hitBox = animator.gameObject.GetComponentInChildren<HitBox>();
         hitBox.SetResponder(this);
         hitBox.enabledMultipleHit = this.enabledMultipleHits;
         hitBox.StartCheckingCollision();
@@ -48,17 +49,14 @@ public class AttackHorizontal : StateMachineBehaviour, IHitBoxResponder
     //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (0.35f <= stateInfo.normalizedTime && stateInfo.normalizedTime <= 0.45f)  // 타격타이밍 맞추기
-            hitBox.UpdateHitBox();
+        hitBox.UpdateHitBox();        
     }
 
     //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        hitBox.StopCheckingCollision();        
+        hitBox.StopCheckingCollision();
     }
-
-
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

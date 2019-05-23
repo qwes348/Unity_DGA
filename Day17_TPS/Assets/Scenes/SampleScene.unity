@@ -196,7 +196,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
@@ -865,13 +865,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1110209153}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: 0.12983432, z: -0, w: 0.9915358}
+  m_LocalPosition: {x: -0.132, y: 0, z: 0.116}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1456348636}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 14.920001, z: 0}
 --- !u!135 &1110209155
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -902,10 +902,9 @@ MonoBehaviour:
     m_Bits: 1024
   hitBoxes:
   - {fileID: 1110209157}
-  - {fileID: 1110209155}
   inactiveColor: {r: 0.49056602, g: 0.488252, b: 0.488252, a: 0.89411765}
-  collisionOpenColor: {r: 0.22629897, g: 0.9622642, b: 0.16794233, a: 0.84705883}
-  collidingColor: {r: 1, g: 0.3915094, b: 0.8706083, a: 0.84705883}
+  collisionOpenColor: {r: 0.22629897, g: 0.9622642, b: 0.16794233, a: 0.67058825}
+  collidingColor: {r: 1, g: 0.3915094, b: 0.8706083, a: 0.6901961}
   drawGizmo: 1
   updateInEditor: 0
   state: 1
@@ -920,8 +919,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 0.33062446, y: 0.1980017, z: 0.6604644}
-  m_Center: {x: 0.24537286, y: -0.0053790733, z: 0.3670209}
+  m_Size: {x: 0.6171707, y: 0.1980017, z: 1.4636855}
+  m_Center: {x: 0.38864595, y: -0.0053790733, z: 0.39015663}
 --- !u!1 &1119650659
 GameObject:
   m_ObjectHideFlags: 0
@@ -1356,7 +1355,7 @@ PrefabInstance:
     - target: {fileID: 4405347816952193348, guid: 6d07403adf98f5249bf1d939975823b5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4405347816952193348, guid: 6d07403adf98f5249bf1d939975823b5,
         type: 3}

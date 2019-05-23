@@ -21,6 +21,8 @@ public class AxeLocomotionBT : StateMachineBehaviour
 
         if (Input.GetKeyDown(KeyCode.C) && !animator.IsInTransition(0))
             animator.SetTrigger("ComboAttack");
+        if (Input.GetKeyDown(KeyCode.V) && !animator.IsInTransition(0))
+            animator.SetTrigger("Attack2");
 
         if (Input.GetKeyDown(KeyCode.E) && pc.isEquipped && !animator.IsInTransition(0))
         {

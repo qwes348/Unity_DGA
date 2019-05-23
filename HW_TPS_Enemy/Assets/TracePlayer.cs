@@ -2,44 +2,60 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TracePlayer : StateMachineBehaviour
+public class TracePlayer : MonoBehaviour
 {
-    Rigidbody rb;
-    GameObject creature;
+    Rigidbody rb;    
     Vector3 targetPosition;
+    CreatureHitReaction cr;
+    RaycastHit hit;
+    Animator anim;
+    float moveSpeed = 2f;
 
+    public bool isAttacking = false;
     public GameObject targetPlayer;
 
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    // Start is called before the first frame update
+    void Start()
     {
-        rb = animator.gameObject.GetComponent<Rigidbody>();
-        creature = animator.gameObject;
+        rb = GetComponent<Rigidbody>();
+        cr = GetComponent<CreatureHitReaction>();
+        anim = GetComponent<Animator>();
     }
 
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    // Update is called once per frame
+    void Update()
     {
-        targetPosition = new Vector3(targetPlayer.transform.position.x, creature.transform.position.y, targetPlayer.transform.position.z);
-        creature.transform.LookAt(targetPosition);
-        //rb.MovePosition(creature.transform.forward * Time.deltaTime);
-    }    
-
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        if (cr.isTracing || isAttacking)
+        {
+            targetPosition = new Vector3(targetPlayer.transform.position.x, transform.position.y, targetPlayer.transform.position.z);
+            transform.LookAt(targetPosition);
+            if (Physics.Raycast(transform.position, transform.forward, out hit, 1.1f))
+            {
+                if (hit.collider.transform.root.gameObject.name == "Player")
+                {
+                    isAttacking = true;
+                    cr.isTracing = false;
+                    anim.SetBool("isTracing", cr.isTracing);
+                    anim.SetBool("isAttacking", isAttacking);
+                }
+            }
+            else
+            {
+                isAttacking = false;
+                //cr.isTracing = true;
+                anim.SetBool("isAttacking", isAttacking);
+                //anim.SetBool("isTracing", cr.isTracing);
+                return;
+            }
+        }
+    }
+    private void FixedUpdate()
     {
-
+        if(cr.isTracing)
+        {
+            Vector3 move = transform.forward * moveSpeed * Time.fixedDeltaTime;
+            rb.MovePosition(rb.position + move);
+        }
     }
 
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
 }

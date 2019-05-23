@@ -17,9 +17,9 @@ TagManager:
   - 
   - Lighting
   - Ground
-  - Postprocessing
-  - Player
-  - 
+  - HitBox
+  - HurtBox
+  - PlayerHurtBox
   - 
   - 
   - 

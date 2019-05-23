@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackHorizontal : StateMachineBehaviour, IHitBoxResponder
+public class AxeAttack360High : StateMachineBehaviour, IHitBoxResponder
 {
     public int damage = 5;
     public bool enabledMultipleHits = false;
@@ -30,9 +30,7 @@ public class AttackHorizontal : StateMachineBehaviour, IHitBoxResponder
                        2f);
 
         BoxHitReaction hr = collider.GetComponentInParent<BoxHitReaction>();
-        CreatureHitReaction cr = collider.GetComponentInParent<CreatureHitReaction>();
         hr?.Hurt(damage, hitPoint, hitNormal, hitDirection);
-        cr?.Hurt(damage, hitPoint, hitNormal, hitDirection);
     }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -55,10 +53,8 @@ public class AttackHorizontal : StateMachineBehaviour, IHitBoxResponder
     //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        hitBox.StopCheckingCollision();        
+        hitBox.StopCheckingCollision();
     }
-
-
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
