@@ -11,7 +11,7 @@ public class TracePlayer : MonoBehaviour
     Animator anim;
     float moveSpeed = 2f;
 
-    public bool isAttacking = false;
+    //public bool isAttacking = false;
     public GameObject targetPlayer;
 
     // Start is called before the first frame update
@@ -25,7 +25,7 @@ public class TracePlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (cr.isTracing || isAttacking)
+        if (cr.isTracing/* || isAttacking*/)
         {
             targetPosition = new Vector3(targetPlayer.transform.position.x, transform.position.y, targetPlayer.transform.position.z);
             transform.LookAt(targetPosition);
@@ -33,17 +33,18 @@ public class TracePlayer : MonoBehaviour
             {
                 if (hit.collider.transform.root.gameObject.name == "Player")
                 {
-                    isAttacking = true;
+                    //isAttacking = true;
                     cr.isTracing = false;
                     anim.SetBool("isTracing", cr.isTracing);
-                    anim.SetBool("isAttacking", isAttacking);
+                    //anim.SetBool("isAttacking", isAttacking);
+                    anim.SetTrigger("isAttacking");
                 }
             }
             else
             {
-                isAttacking = false;
+                //isAttacking = false;
                 //cr.isTracing = true;
-                anim.SetBool("isAttacking", isAttacking);
+                //anim.SetBool("isAttacking", isAttacking);                
                 //anim.SetBool("isTracing", cr.isTracing);
                 return;
             }

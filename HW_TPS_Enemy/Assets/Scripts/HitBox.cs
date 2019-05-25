@@ -29,7 +29,9 @@ public class HitBox : MonoBehaviour
 
     List<Collider> colliderList;
     IHitBoxResponder responder = null;
-    Dictionary<int, int> hitObjects;
+
+    [HideInInspector]
+    public Dictionary<int, int> hitObjects;
 
     public bool enabledMultipleHit { get; set; }
 
