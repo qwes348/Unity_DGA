@@ -59,11 +59,10 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.41837776
+      - time: 0.50019795
         functionName: Disarm
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 168a67ecee6a87f42bb71c831750149d,
-          type: 3}
+        objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
