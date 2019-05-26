@@ -89,10 +89,6 @@ public class PlayerController : MonoBehaviour
 
         anim.SetFloat("h", h);
         anim.SetFloat("v", v);
-        if (!isGrounded)
-            anim.SetBool("isGrounded", false);
-        else
-            anim.SetBool("isGrounded", true);
     }
 
     private void FixedUpdate()
@@ -104,7 +100,6 @@ public class PlayerController : MonoBehaviour
 
     private void Jump(float jumpHeight)
     {
-        anim.SetTrigger("OnJump");
         rb.drag = 0;
         rb.velocity = Vector3.zero;
         rb.AddForce(Vector3.up * Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);

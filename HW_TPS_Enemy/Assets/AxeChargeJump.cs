@@ -2,30 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DropWeapon : StateMachineBehaviour
+public class AxeChargeJump : StateMachineBehaviour
 {
+    PlayerController pc;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetInteger("HoldingWeaponId", 0);
+        pc = animator.gameObject.GetComponent<PlayerController>();        
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-
-    }
+    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    
+    //}
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Transform weaponHolder = animator.GetComponent<PlayerController>().weaponHolder;
-        Transform weapon = weaponHolder.GetChild(0);
-        foreach (var c in weapon.GetComponents<Collider>())
-            c.enabled = true;
-        weapon.SetParent(null);
-        weapon.GetComponent<Rigidbody>().isKinematic = false;
-        //animator.SetInteger("HoldingWeaponId", 0);
+        //pc.Jump(pc.jumpHeight);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

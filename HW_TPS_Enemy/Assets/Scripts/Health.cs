@@ -9,10 +9,13 @@ public class Health : MonoBehaviour
     public float currentHealth = maxHealth;
     public RectTransform foreground;
 
+    Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
-        RedrawHealthBar();     
+        RedrawHealthBar();
+        anim = transform.GetComponent<Animator>();
     }
 
     private void RedrawHealthBar()
@@ -27,7 +30,7 @@ public class Health : MonoBehaviour
         currentHealth -= amount;
         if(currentHealth <= 0f)
         {
-            currentHealth = 0f;
+            currentHealth = 0f;            
         }
         RedrawHealthBar();
     }

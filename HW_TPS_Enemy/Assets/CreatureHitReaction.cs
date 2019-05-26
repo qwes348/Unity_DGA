@@ -8,6 +8,8 @@ public class CreatureHitReaction : MonoBehaviour
 
     Rigidbody rb;
     Animator anim;
+    Health health;
+    bool isDead = false;
 
     public bool isTracing = false;
 
@@ -16,6 +18,7 @@ public class CreatureHitReaction : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        health = GetComponent<Health>();
     }
 
     public void Hurt(int damage, Vector3 hitPoint, Vector3 hitNormal, Vector3 hitDirection)
@@ -26,5 +29,12 @@ public class CreatureHitReaction : MonoBehaviour
         rb?.AddForce(hitDirection * 1f, ForceMode.VelocityChange);    // 넉백
         isTracing = true;
         anim.SetBool("isTracing", isTracing);
+
+        if (health.currentHealth == 0 && !isDead)
+        {
+            isDead = true;
+            anim.SetTrigger("isDie");
+            Destroy(this.gameObject, 5f);
+        }
     }
 }
