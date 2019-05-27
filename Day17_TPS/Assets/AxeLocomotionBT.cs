@@ -32,6 +32,10 @@ public class AxeLocomotionBT : StateMachineBehaviour
         {
             animator.SetTrigger("Disarm");
         }
+        if (Input.GetButtonDown("Jump") && pc.onGround && !animator.IsInTransition(0))
+        {
+            animator.SetTrigger("Jump");
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

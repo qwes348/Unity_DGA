@@ -6,16 +6,22 @@ public class BoxHitReaction : MonoBehaviour
 {
     public GameObject hitFXPrefab;
 
+    Animator anim;
     Rigidbody rb;
 
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
     }
     
     public void Hurt(int damage, Vector3 hitPoint, Vector3 hitNormal, Vector3 hitDirection)
     {
+        if(anim != null)
+        {
+            anim.SetTrigger("Reaction");
+        }
         GetComponent<Health>().DecreaseHP(damage);    // HP감소 옮겨옴
         GameObject fx = Instantiate(hitFXPrefab, hitPoint, Quaternion.identity);   // 이펙트소환
         Destroy(fx, 1.5f);
