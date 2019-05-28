@@ -5,8 +5,9 @@ using UnityEngine;
 public class RageMode : MonoBehaviour
 {
     public bool isRageMode = false;
-
     public bool endRagemode = false;
+    public ParticleSystem rageEffect;
+
     Health health;
     Animator anim;
 
@@ -24,6 +25,7 @@ public class RageMode : MonoBehaviour
         {
             isRageMode = true;
             anim.SetTrigger("OnRage");
+            rageEffect.gameObject.SetActive(true);
             Invoke("EndRageMode", 30f);
         }
     }
@@ -31,6 +33,7 @@ public class RageMode : MonoBehaviour
     void EndRageMode()
     {
         endRagemode = true;
+        rageEffect.gameObject.SetActive(false);
         isRageMode = false;
     }
 }
