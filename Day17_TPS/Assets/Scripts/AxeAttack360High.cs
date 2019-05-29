@@ -7,8 +7,8 @@ public class AxeAttack360High : StateMachineBehaviour, IHitBoxResponder
     public int damage = 5;
     public bool enabledMultipleHits = false;
 
-    HitBox hitBox;
-    Dictionary<int, int> hitObjects;
+    bool entered;
+    HitBox hitBox;    
 
     public void CollisionWith(Collider collider, HitBox hitbox)
     {
@@ -30,7 +30,7 @@ public class AxeAttack360High : StateMachineBehaviour, IHitBoxResponder
                        2f);
 
         BoxHitReaction hr = collider.GetComponentInParent<BoxHitReaction>();
-        hr?.Hurt(damage, hitPoint, hitNormal, hitDirection);
+        hr?.Hurt(damage, hitPoint, hitNormal, hitDirection, ReactionType.Head);
     }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -40,7 +40,7 @@ public class AxeAttack360High : StateMachineBehaviour, IHitBoxResponder
         hitBox.SetResponder(this);
         hitBox.enabledMultipleHit = this.enabledMultipleHits;
         hitBox.StartCheckingCollision();
-        hitObjects = new Dictionary<int, int>();
+        entered = false;
     }
 
     //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -48,6 +48,14 @@ public class AxeAttack360High : StateMachineBehaviour, IHitBoxResponder
     {
         if (0.35f <= stateInfo.normalizedTime && stateInfo.normalizedTime <= 0.45f)  // 타격타이밍 맞추기
             hitBox.UpdateHitBox();
+
+        if(!entered && stateInfo.normalizedTime >= 0.15f)
+        {
+            CameraShake cs = Camera.main.GetComponent<CameraShake>();
+            cs.enabled = true;
+            cs.StartCoroutine(cs.Shake(0.05f, 0.5f));
+            entered = !entered;
+        }
     }
 
     //OnStateExit is called when a transition ends and the state machine finishes evaluating this state

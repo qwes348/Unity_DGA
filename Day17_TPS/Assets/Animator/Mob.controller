@@ -391,10 +391,10 @@ AnimatorStateMachine:
     m_Position: {x: 300, y: 20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2970267600873424248}
-    m_Position: {x: 300, y: 110, z: 0}
+    m_Position: {x: 310, y: 190, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4740470294991160382}
-    m_Position: {x: 300, y: 210, z: 0}
+    m_Position: {x: 310, y: 110, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions:
@@ -438,12 +438,12 @@ AnimatorStateMachine:
   - {fileID: 2126817484835283656}
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: -225888839120575855}
-    second:
-    - {fileID: -2112906533825159082}
   - first: {fileID: -1549307292320781995}
     second:
     - {fileID: 8782949686281183024}
+  - first: {fileID: -225888839120575855}
+    second:
+    - {fileID: -2112906533825159082}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 870, y: 10, z: 0}
   m_EntryPosition: {x: 460, y: -140, z: 0}
@@ -561,7 +561,7 @@ AnimatorStateMachine:
   m_StateMachineBehaviours:
   - {fileID: -18875497377437707}
   m_AnyStatePosition: {x: 20, y: 20, z: 0}
-  m_EntryPosition: {x: 20, y: 120, z: 0}
+  m_EntryPosition: {x: 10, y: 120, z: 0}
   m_ExitPosition: {x: 830, y: 130, z: 0}
   m_ParentStateMachinePosition: {x: 830, y: 30, z: 0}
   m_DefaultState: {fileID: 4315167127973769571}
@@ -598,24 +598,6 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: Reaction1
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: Reaction2
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: Reaction3
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
   - m_Name: Reaction
     m_Type: 9
     m_DefaultFloat: 0
@@ -630,6 +612,12 @@ AnimatorController:
     m_Controller: {fileID: 0}
   - m_Name: JumpAttack
     m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: ReactionType
+    m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -713,9 +701,9 @@ AnimatorTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: Reaction1
-    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: ReactionType
+    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 55709012716636520}
   m_Solo: 0
@@ -838,7 +826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  enabledMultipleHits: 1
+  enabledMultipleHits: 0
 --- !u!1109 &5774951589509350788
 AnimatorTransition:
   m_ObjectHideFlags: 1
@@ -847,9 +835,9 @@ AnimatorTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: Reaction2
-    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: ReactionType
+    m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2970267600873424248}
   m_Solo: 0
@@ -886,9 +874,9 @@ AnimatorTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: Reaction3
-    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: ReactionType
+    m_EventTreshold: 3
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4740470294991160382}
   m_Solo: 0
@@ -982,7 +970,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: JumpAttack
-  m_Speed: 1
+  m_Speed: 1.4
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -4720191588451760166}
@@ -998,7 +986,7 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: -203655887218126122, guid: c335e3b19b40b68428d397de84aac901,
     type: 3}
-  m_Tag: 
+  m_Tag: Invincible
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 

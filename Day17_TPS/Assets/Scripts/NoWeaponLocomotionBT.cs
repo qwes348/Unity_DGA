@@ -40,6 +40,14 @@ public class NoWeaponLocomotionBT : StateMachineBehaviour
         }
         if (Input.GetKeyDown(KeyCode.C) && !animator.IsInTransition(0))
             animator.SetTrigger("ComboAttack");
+
+        if (Input.GetKeyDown(KeyCode.V) && pc.isDisarmed && !pc.isEquipped && !animator.IsInTransition(0))
+        {
+            Transform weaponDisarmHolder = animator.GetComponent<PlayerController>().weaponDisarmHolder;
+            Transform weapon = weaponDisarmHolder.GetChild(0);
+            animator.SetInteger("HandlingWeaponId", weapon.GetComponent<WeaponType>().weaponId);
+            animator.SetTrigger("DrawAttack");
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

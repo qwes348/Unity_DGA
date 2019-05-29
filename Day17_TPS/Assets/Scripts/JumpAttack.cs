@@ -8,6 +8,7 @@ public class JumpAttack : StateMachineBehaviour, IHitBoxResponder
     public bool enabledMultipleHits = false;
 
     HitBox hitBox;
+    bool entered;  // 이펙트가 한번만 들어가게하기위한 변수
 
     public void CollisionWith(Collider collider, HitBox hitbox)
     {
@@ -29,7 +30,7 @@ public class JumpAttack : StateMachineBehaviour, IHitBoxResponder
                                2f);
 
         BoxHitReaction hr = collider.GetComponentInParent<BoxHitReaction>();
-        hr?.Hurt(damage, hitPoint, hitNormal, hitDirection);
+        hr?.Hurt(damage, hitPoint, hitNormal, hitDirection, ReactionType.Stun);
     }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -39,6 +40,7 @@ public class JumpAttack : StateMachineBehaviour, IHitBoxResponder
         hitBox.SetResponder(this);
         hitBox.enabledMultipleHit = this.enabledMultipleHits;
         hitBox.StartCheckingCollision();
+        entered = false;
     }
 
     //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -46,6 +48,17 @@ public class JumpAttack : StateMachineBehaviour, IHitBoxResponder
     {
         if (0.56f <= stateInfo.normalizedTime && stateInfo.normalizedTime <= 0.80f)  // 타격타이밍 맞추기
             hitBox.UpdateHitBox();
+        if(!entered && stateInfo.normalizedTime >= 0.6f)
+        {
+            MobController mc = animator.GetComponent<MobController>();
+            var fx = Instantiate(mc.jumpAttackFX, mc.transform.position, Quaternion.identity);
+            Destroy(fx, 2f);
+
+            CameraShake cs = Camera.main.GetComponent<CameraShake>();
+            cs.enabled = true;
+            cs.StartCoroutine(cs.Shake(0.1f, 0.4f));
+            entered = !entered;
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

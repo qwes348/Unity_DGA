@@ -40,19 +40,20 @@ public class MobReactions : StateMachineBehaviour
     // OnStateMachineEnter is called when entering a state machine via its Entry Node
     override public void OnStateMachineEnter(Animator animator, int stateMachinePathHash)
     {
-        int r = 0; // Random.Range(0, 3);
-        switch(r)
-        {
-            case 0:
-                animator.SetTrigger("Reaction1");
-                break;
-            case 1:
-                animator.SetTrigger("Reaction2");
-                break;
-            case 2:
-                animator.SetTrigger("Reaction3");
-                break;
-        }
+        // Reaction 파라미터를 Enum을 이용한 int로 바꿔서 이제 필요없음
+        //int r = 0; // Random.Range(0, 3);
+        //switch(r)
+        //{
+        //    case 0:
+        //        animator.SetTrigger("Reaction1");
+        //        break;
+        //    case 1:
+        //        animator.SetTrigger("Reaction2");
+        //        break;
+        //    case 2:
+        //        animator.SetTrigger("Reaction3");
+        //        break;
+        //}
     }
 
     // OnStateMachineExit is called when exiting a state machine via its Exit Node

@@ -152,7 +152,7 @@ public class PlayerController : MonoBehaviour
 
     void Disarm()
     {
-        if (isEquipped)
+        if (isEquipped && !anim.IsInTransition(0))  //  && !anim.IsInTransition(0) => 피격중 히트판정을 맞으면 무기가 이상한곳에 꽂히는걸 방지함
         {
             Transform weapon = weaponHolder.GetChild(0);
             weapon.SetParent(weaponDisarmHolder);
@@ -161,7 +161,7 @@ public class PlayerController : MonoBehaviour
     }
     void Equip()
     {
-        if(isDisarmed)
+        if(isDisarmed && !anim.IsInTransition(0))
         {
             Transform weapon = weaponDisarmHolder.GetChild(0);
             weapon.SetParent(weaponHolder);

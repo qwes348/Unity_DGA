@@ -2,9 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ReactionType
+{
+    None = 0,
+    Head,
+    Body,
+    Stomach,
+    Bottom,
+    Stun
+}
+
 public class BoxHitReaction : MonoBehaviour
 {
     public GameObject hitFXPrefab;
+    public GameObject stunFXPrefab;
+    public Transform stunFXPos;
 
     Animator anim;
     Rigidbody rb;
@@ -16,13 +28,21 @@ public class BoxHitReaction : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
     
-    public void Hurt(int damage, Vector3 hitPoint, Vector3 hitNormal, Vector3 hitDirection)
+    public void Hurt(int damage, Vector3 hitPoint, Vector3 hitNormal, Vector3 hitDirection, ReactionType reactionType)
     {
         if(anim != null
             && !anim.GetCurrentAnimatorStateInfo(0).IsTag("Reaction")
+            && !anim.GetCurrentAnimatorStateInfo(0).IsTag("Invincible")
             && !anim.IsInTransition(0))
         {
             anim.SetTrigger("Reaction");
+            anim.SetInteger("ReactionType", (int)reactionType);
+
+            if(reactionType == ReactionType.Stun)
+            {
+                GameObject stunFX = Instantiate(stunFXPrefab, stunFXPos.position, Quaternion.LookRotation(Vector3.up), stunFXPos);
+                Destroy(stunFX, 3.2f);
+            }
         }
         GetComponent<Health>().DecreaseHP(damage);    // HP감소 옮겨옴
         GameObject fx = Instantiate(hitFXPrefab, hitPoint, Quaternion.identity);   // 이펙트소환
