@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -54,10 +55,25 @@ public class JumpAttack : StateMachineBehaviour, IHitBoxResponder
             var fx = Instantiate(mc.jumpAttackFX, mc.transform.position, Quaternion.identity);
             Destroy(fx, 2f);
 
+            AddFroceToEny(200f, hitBox.transform.position, 5f, 1f);
+
             CameraShake cs = Camera.main.GetComponent<CameraShake>();
             cs.enabled = true;
             cs.StartCoroutine(cs.Shake(0.1f, 0.4f));
             entered = !entered;
+        }
+    }
+
+    private void AddFroceToEny(float power, Vector3 explosionPosition, float radius, float upwardsModifier) // 힘, 폭발지점, 거리원지름, 위쪽힘을줄지 안줄지
+    {
+        Collider[] colliders = Physics.OverlapSphere(explosionPosition, radius);
+        foreach(var c in colliders)
+        {
+            Rigidbody rb = c.GetComponent<Rigidbody>();
+            if(rb != null)
+            {                
+                rb.AddExplosionForce(power, explosionPosition, radius, upwardsModifier);
+            }
         }
     }
 

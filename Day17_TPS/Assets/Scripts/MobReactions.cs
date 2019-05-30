@@ -13,11 +13,11 @@ public class MobReactions : StateMachineBehaviour
     //}
 
     // OnStateUpdate is called before OnStateUpdate is called on any state inside this state machine
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        Debug.Log(animator.GetCurrentAnimatorStateInfo(0).fullPathHash
-                  == Animator.StringToHash("Base Layer.Reactions.Head Hit"));
-    }
+    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    Debug.Log(animator.GetCurrentAnimatorStateInfo(0).fullPathHash
+    //              == Animator.StringToHash("Base Layer.Reactions.Head Hit"));
+    //}
 
     // OnStateExit is called before OnStateExit is called on any state inside this state machine
     //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -38,23 +38,23 @@ public class MobReactions : StateMachineBehaviour
     //}
 
     // OnStateMachineEnter is called when entering a state machine via its Entry Node
-    override public void OnStateMachineEnter(Animator animator, int stateMachinePathHash)
-    {
-        // Reaction 파라미터를 Enum을 이용한 int로 바꿔서 이제 필요없음
-        //int r = 0; // Random.Range(0, 3);
-        //switch(r)
-        //{
-        //    case 0:
-        //        animator.SetTrigger("Reaction1");
-        //        break;
-        //    case 1:
-        //        animator.SetTrigger("Reaction2");
-        //        break;
-        //    case 2:
-        //        animator.SetTrigger("Reaction3");
-        //        break;
-        //}
-    }
+    //override public void OnStateMachineEnter(Animator animator, int stateMachinePathHash)
+    //{
+    //    // Reaction 파라미터를 Enum을 이용한 int로 바꿔서 이제 필요없음
+    //    //int r = 0; // Random.Range(0, 3);
+    //    //switch(r)
+    //    //{
+    //    //    case 0:
+    //    //        animator.SetTrigger("Reaction1");
+    //    //        break;
+    //    //    case 1:
+    //    //        animator.SetTrigger("Reaction2");
+    //    //        break;
+    //    //    case 2:
+    //    //        animator.SetTrigger("Reaction3");
+    //    //        break;
+    //    //}
+    //}
 
     // OnStateMachineExit is called when exiting a state machine via its Exit Node
     //override public void OnStateMachineExit(Animator animator, int stateMachinePathHash)
