@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1557,7 +1557,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1637085257}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 106, z: 0}
 --- !u!199 &1062324055
 ParticleSystemRenderer:
@@ -2950,8 +2950,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.8962264, g: 0.14152756, b: 0.04650232, a: 1}
-        key1: {r: 0.9245283, g: 0.3863018, b: 0.047970813, a: 0}
+        key0: {r: 0.8113208, g: 0.1271723, b: 0.04209684, a: 1}
+        key1: {r: 0.9254902, g: 0.17910631, b: 0.047058836, a: 0}
         key2: {r: 0.9270094, g: 0.9622642, b: 0.104396604, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -6595,12 +6595,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194238168}
-  m_LocalRotation: {x: 0.09841006, y: -0.7002254, z: 0.7002251, w: 0.09840998}
-  m_LocalPosition: {x: 0.5, y: 0.012, z: 0.758}
+  m_LocalRotation: {x: 0.09841005, y: -0.7002255, z: 0.7002252, w: 0.09840997}
+  m_LocalPosition: {x: 0.50000024, y: 0.011999954, z: 0.758}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1637085257}
-  m_RootOrder: 2
+  m_Father: {fileID: 1319059011}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90.00001, y: 0, z: 164.00002}
 --- !u!199 &1194238170
 ParticleSystemRenderer:
@@ -11555,6 +11555,38 @@ Transform:
   m_Father: {fileID: 1799425295}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1319059010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1319059011}
+  m_Layer: 0
+  m_Name: AxeGlow ParticleSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1319059011
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1319059010}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1474978377}
+  - {fileID: 1194238169}
+  m_Father: {fileID: 1456348636}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1456348635
 GameObject:
   m_ObjectHideFlags: 0
@@ -11567,6 +11599,7 @@ GameObject:
   - component: {fileID: 1456348637}
   - component: {fileID: 1456348638}
   - component: {fileID: 1456348639}
+  - component: {fileID: 1456348640}
   m_Layer: 0
   m_Name: BattleAxe
   m_TagString: RightWeapon
@@ -11588,6 +11621,7 @@ Transform:
   - {fileID: 910148182}
   - {fileID: 1110209154}
   - {fileID: 1637085257}
+  - {fileID: 1319059011}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 179.427}
@@ -11633,6 +11667,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponId: 1
+--- !u!114 &1456348640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456348635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b16206b669cfa314c8fc0712f24798dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pc: {fileID: 1799425296}
+  axeTrailParticle: {fileID: 1637085256}
+  axeGlowParticle: {fileID: 1319059010}
 --- !u!1 &1474978376
 GameObject:
   m_ObjectHideFlags: 0
@@ -11658,12 +11707,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1474978376}
-  m_LocalRotation: {x: -0.7002253, y: 0.098410234, z: 0.098410234, w: 0.7002253}
-  m_LocalPosition: {x: 0.5, y: -0.067, z: 0.758}
+  m_LocalRotation: {x: -0.70022535, y: 0.098410234, z: 0.09841022, w: 0.70022535}
+  m_LocalPosition: {x: 0.5000002, y: -0.06700007, z: 0.758}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1637085257}
-  m_RootOrder: 1
+  m_Father: {fileID: 1319059011}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 16}
 --- !u!199 &1474978378
 ParticleSystemRenderer:
@@ -11917,7 +11966,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 2
       minColor: {r: 0.8962264, g: 0.3623647, b: 0.07186722, a: 0.47058824}
-      maxColor: {r: 0.7830189, g: 0.15881987, b: 0.15881987, a: 0.5882353}
+      maxColor: {r: 0.8018868, g: 0.07186719, b: 0.07186719, a: 0.5882353}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -16687,7 +16736,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1637085257
 Transform:
   m_ObjectHideFlags: 0
@@ -16700,8 +16749,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1998986935}
-  - {fileID: 1474978377}
-  - {fileID: 1194238169}
   - {fileID: 1062324054}
   m_Father: {fileID: 1456348636}
   m_RootOrder: 2
@@ -18575,7 +18622,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 0.8962264, g: 0.14152756, b: 0.04650232, a: 1}
-        key1: {r: 0.9245283, g: 0.3863018, b: 0.047970813, a: 0}
+        key1: {r: 0.8113208, g: 0.2970697, b: 0.14159843, a: 0}
         key2: {r: 0.9270094, g: 0.9622642, b: 0.104396604, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}

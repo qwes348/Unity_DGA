@@ -12,6 +12,7 @@ public class AxeLocomotionBT : StateMachineBehaviour
     {
         pc = animator.GetComponent<PlayerController>();
         pc.moveSpeed = moveSpeed;
+        
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
