@@ -21,14 +21,14 @@ public class ParticleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (pc.isEquipped)
+        if (pc.isEquipped)   // 장착했을때
             axeGlowParticle.SetActive(true);
-        else if (pc.isDisarmed)
+        else if (pc.isDisarmed)     // 등에넣었을때
             axeGlowParticle.SetActive(false);
-        else if (!pc.isEquipped && !pc.isDisarmed)
+        else if (!pc.isEquipped && !pc.isDisarmed)  // 버렸을때
             axeGlowParticle.SetActive(false);
 
-        if (axeAtk.isAttacking)
+        if (axeAtk.isAttacking)     // 공격할때
             axeTrailParticle.SetActive(true);
         else
             axeTrailParticle.SetActive(false);

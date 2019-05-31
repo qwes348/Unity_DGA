@@ -41,7 +41,7 @@ public class OnAxeAttack : StateMachineBehaviour
     override public void OnStateMachineEnter(Animator animator, int stateMachinePathHash)
     {
         isAttacking = true;
-        Debug.Log("true");
+        //Debug.Log("true");
     }
 
     // OnStateMachineExit is called when exiting a state machine via its Exit Node

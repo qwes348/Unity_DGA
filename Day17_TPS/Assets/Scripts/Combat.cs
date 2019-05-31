@@ -37,7 +37,7 @@ public class Combat : StateMachineBehaviour
     // OnStateMachineEnter is called when entering a state machine via its Entry Node
     override public void OnStateMachineEnter(Animator animator, int stateMachinePathHash)
     {
-        int r = 1; // Random.Range(0, 2);
+        int r = Random.Range(0, 2);
         if (r == 0)
             animator.SetTrigger("Attack1");
         else if(r == 1)
