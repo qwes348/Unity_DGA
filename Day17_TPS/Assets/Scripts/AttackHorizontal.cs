@@ -53,6 +53,8 @@ public class AttackHorizontal : StateMachineBehaviour, IHitBoxResponder
     //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Axe.Axe Attack.Attack 360 High"))
+            hitBox.StopCheckingCollision();
         animator.SetBool("ComboAttack", false);
     }
 
