@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/TreasureBoxCard.unity
+    guid: a62afaf68ac744f42b0e3d1b81ba1063
   m_configObjects: {}

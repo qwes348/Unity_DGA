@@ -23,6 +23,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 Debug.LogWarning("[Singleton] Instance '" + typeof(T) +
                     "' already destroyed. Returning null.");
                 return null;
+                //return m_Instance;
             }
 
             lock (m_Lock)
