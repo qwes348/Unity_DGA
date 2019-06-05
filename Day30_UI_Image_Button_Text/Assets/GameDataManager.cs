@@ -10,6 +10,8 @@ public class GameDataManager : Singleton<GameDataManager>
     float maxHealth = 100f;
     int timeCount = 99;
 
+    float p2CurrentHealth = 100f;
+
     int timeStamp = 0;  // 값을 바꾸는 모든함수에서 timeStamp를 업데이트해서 기록을 남긴다
 
     public void TakeDamage(float amount)
@@ -20,6 +22,14 @@ public class GameDataManager : Singleton<GameDataManager>
         UpdateTimeStamp();
     }
 
+    public void P2TakeDamage(float amount)
+    {
+        p2CurrentHealth -= amount;
+        if (p2CurrentHealth <= 0f)
+            p2CurrentHealth = 0f;
+        UpdateTimeStamp();
+    }
+
     public void Heal(float amount)
     {
         currentHealth += amount;
@@ -27,9 +37,20 @@ public class GameDataManager : Singleton<GameDataManager>
         UpdateTimeStamp();
     }
 
+    public void P2Heal(float amount)
+    {
+        p2CurrentHealth += amount;
+        p2CurrentHealth = Mathf.Clamp(p2CurrentHealth, 0f, maxHealth);
+        UpdateTimeStamp();
+    }
+
     public float GetCurrentHealth()
     {
         return currentHealth;
+    }
+    public float P2GetCurrentHealth()
+    {
+        return p2CurrentHealth;
     }
     public float GetMaxHealth()
     {
