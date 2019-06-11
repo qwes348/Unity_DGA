@@ -5,7 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TreasureBoxCard.unity
     guid: a62afaf68ac744f42b0e3d1b81ba1063
+  - enabled: 0
+    path: Assets/Scenes/TreasureBoxCard_UIParticleSystem.unity
+    guid: 807d79243c4a8154fb836d309b6dc2e4
+  - enabled: 1
+    path: Assets/Scenes/Button_9Patch.unity
+    guid: c39b371e4dec80243a9a31f33441cdf1
   m_configObjects: {}
