@@ -6,8 +6,10 @@ public class GameDataManager : Singleton<GameDataManager>
 {
     protected GameDataManager() { }  // private와 동일하지만 상속받은 자식은 쓸수있다.
 
-    float currentHealth = 20f;
-    float maxHealth = 20f;
+    float currentHealth = 28f;
+    float maxHealth = 28f;
+    public bool isDie = false;
+    public bool isFullRecovery = true;
 
     int timeStamp = 0;  // 값을 바꾸는 모든함수에서 timeStamp를 업데이트해서 기록을 남긴다
 

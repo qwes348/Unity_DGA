@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
     public Health Heart;
-    public Health glowHeart;
+    //public Health glowHeart;
 
     public Button damageButton;
     public Button healButton;
@@ -20,7 +20,9 @@ public class UIController : MonoBehaviour
     void Start()
     {
         damageButton.onClick.AddListener(() => GameDataManager.Instance.TakeDamage(damageAmount));
+        damageButton.onClick.AddListener(() => StartCoroutine(Heart.SlowlyDamage(damageAmount)));
         healButton.onClick.AddListener(() => GameDataManager.Instance.Heal(healAmount));
+        healButton.onClick.AddListener(() => StartCoroutine(Heart.SlowlyHeal(healAmount)));
     }
 
     // Update is called once per frame
@@ -32,7 +34,7 @@ public class UIController : MonoBehaviour
             uiTimeStamp = timeStamp;
             float currentHealth = GameDataManager.Instance.GetCurrentHealth();
             float maxHealth = GameDataManager.Instance.GetMaxHealth();
-            Heart.UpdateHearts(damageAmount);
+            //Heart.UpdateHearts(damageAmount, healAmount);            
 
         }
     }
