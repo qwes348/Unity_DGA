@@ -220,6 +220,7 @@ GameObject:
   - component: {fileID: 866683254}
   - component: {fileID: 866683256}
   - component: {fileID: 866683255}
+  - component: {fileID: 866683257}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -287,6 +288,20 @@ MonoBehaviour:
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!114 &866683257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 866683253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0389e335f366fc14585efd215921deb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  helloChat: {fileID: 1438049271975019702, guid: b050436bc9984f6458ea05cddd57b5cb,
+    type: 3}
 --- !u!224 &939208476 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5734859804143708553, guid: b050436bc9984f6458ea05cddd57b5cb,
@@ -1067,21 +1082,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
       objectReference: {fileID: 0}
-    - target: {fileID: 1422559583139854627, guid: b050436bc9984f6458ea05cddd57b5cb,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0.2460395
-      objectReference: {fileID: 0}
-    - target: {fileID: 1422559583139854627, guid: b050436bc9984f6458ea05cddd57b5cb,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.5527478
-      objectReference: {fileID: 0}
-    - target: {fileID: 1422559583139854627, guid: b050436bc9984f6458ea05cddd57b5cb,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.9150943
-      objectReference: {fileID: 0}
     - target: {fileID: 7867806909884863997, guid: b050436bc9984f6458ea05cddd57b5cb,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -1146,6 +1146,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.b
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033895561406859906, guid: b050436bc9984f6458ea05cddd57b5cb,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1422559583139854627, guid: b050436bc9984f6458ea05cddd57b5cb,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.2460395
+      objectReference: {fileID: 0}
+    - target: {fileID: 1422559583139854627, guid: b050436bc9984f6458ea05cddd57b5cb,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.5527478
+      objectReference: {fileID: 0}
+    - target: {fileID: 1422559583139854627, guid: b050436bc9984f6458ea05cddd57b5cb,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.9150943
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b050436bc9984f6458ea05cddd57b5cb, type: 3}
