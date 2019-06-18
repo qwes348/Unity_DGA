@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5734859804143708553}
   - component: {fileID: 36889589623410350}
   - component: {fileID: 6535557506020668236}
+  - component: {fileID: 6946256469365088030}
   m_Layer: 5
   m_Name: ChatMessage
   m_TagString: Untagged
@@ -71,6 +72,20 @@ MonoBehaviour:
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!114 &6946256469365088030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438049271975019702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b99be7ca9866ef34b9a9c28e1b0c3001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alignLeftColor: {r: 0.75294125, g: 0.75294125, b: 0.75294125, a: 1}
+  alignRightColor: {r: 0.24313727, g: 0.54901963, b: 0.91372555, a: 1}
 --- !u!1 &1848656333037259737
 GameObject:
   m_ObjectHideFlags: 0
