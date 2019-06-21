@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class NextStage : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class NextStage : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
+            transform.GetChild(0).DOLocalMoveX(-1, 1);    // 내부적으로 코루틴으로 되어있음 async함
+            transform.GetChild(1).DOLocalMoveX(1, 1);
             SceneMgr.instance.LoadScene(nextStage);            
         }
     }

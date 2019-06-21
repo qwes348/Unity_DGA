@@ -11,7 +11,7 @@ public class GameFlow : MonoBehaviour
 
     static public GameFlow instance;
 
-    GameObject player;
+    public GameObject player;
 
     private void Awake()
     {
@@ -32,24 +32,25 @@ public class GameFlow : MonoBehaviour
     }
 
     private void OnProgress(float progress)
-    {
-        print("progress: " + progress);
+    {        
         progressBar.GetComponent<Image>().fillAmount = progress;
     }
 
     private void OnBeginLoad()
-    {
-        print("OnBeginLoad");
+    {        
         progressBar.parent.gameObject.SetActive(true);
     }
 
     private void OnLoadCompleted()
+    {        
+        progressBar.parent.gameObject.SetActive(false);
+    }
+
+    public void InstantiatePlayer()
     {
-        print("OnLoadCompleted");
-        if(player == null)
+        if (player == null)
         {
             player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
         }
-        progressBar.parent.gameObject.SetActive(false);
     }
 }
