@@ -46,8 +46,10 @@ public class HeartBar : MonoBehaviour
 
     List<Heart> list;
     private Coroutine coAnimDecreaseHP;
+    private Coroutine coAnimIncreaseHP;
     private int previousAmount;
     private bool isAfterDecHP;
+    private bool isAfterIncHP;
 
     private void Awake()
     {
@@ -108,11 +110,18 @@ public class HeartBar : MonoBehaviour
         coAnimDecreaseHP = StartCoroutine(AnimDecreaseHP(amount));
     }
 
+    public void IncreaseHP(int amount)
+    {
+        StopAnim(previousAmount);
+        previousAmount = amount;
+        coAnimIncreaseHP = StartCoroutine(AnimIncreaseHP(amount));
+    }
+
     private void StopAnim(int previousAmount)
     {
-        if(coAnimDecreaseHP != null)
+        if (coAnimDecreaseHP != null)
         {
-            if(!isAfterDecHP)
+            if (!isAfterDecHP)
             {
                 DecHP(previousAmount);
             }
@@ -124,8 +133,22 @@ public class HeartBar : MonoBehaviour
             StopCoroutine(coAnimDecreaseHP);
             coAnimDecreaseHP = null;
         }
-    }
 
+        if (coAnimIncreaseHP != null)
+        {
+            if (!isAfterIncHP)
+            {
+                IncHP(previousAmount);
+            }
+            foreach (var h in list)
+            {
+                h.TurnOffAllGlows();
+            }
+            FillAllHearts();
+            StopCoroutine(coAnimIncreaseHP);
+            coAnimIncreaseHP = null;
+        }
+    }
     IEnumerator AnimDecreaseHP(int amount)
     {
         if (amount <= 0 || CurrentHealth == 0)
@@ -160,8 +183,41 @@ public class HeartBar : MonoBehaviour
         }
     }
 
-    private Image GetGlowImageAtHealthPoint(int i)
+    IEnumerator AnimIncreaseHP(int amount)
     {
+        if (amount <= 0 || CurrentHealth == totalHealth)
+            yield break;
+
+        int last = CurrentHealth + amount > totalHealth ? totalHealth-1 : CurrentHealth + amount-1;
+        int first = CurrentHealth;
+
+        isAfterIncHP = false;
+        FillGlow(first, last);
+        yield return StartCoroutine(AnimGlow());
+        IncHP(amount);
+        isAfterIncHP = true;
+
+        FillAllHearts();
+
+        for (int i = first; i <= last; i++)
+        {
+            Image glow = GetGlowImageAtHealthPoint(i);
+            glow.fillClockwise = true;
+            float begin = 0;
+            float f = 1f;
+
+            while(f > begin)
+            {
+                glow.fillAmount = f;
+                f -= 5f * (last - first + 1) * Time.deltaTime;
+                yield return null;
+            }
+            glow.fillAmount = begin;
+        }
+    }
+
+    private Image GetGlowImageAtHealthPoint(int i)
+    {        
         return GetHeartAtHealthPoint(i).glowImages[i % healthPerHeart];
     }
 
@@ -204,11 +260,6 @@ public class HeartBar : MonoBehaviour
     private Heart GetHeartAtHealthPoint(int i)
     {
         return list[i / healthPerHeart];
-    }
-
-    public void IncreaseHP(int amount)
-    {
-        ;
     }
 
 }
