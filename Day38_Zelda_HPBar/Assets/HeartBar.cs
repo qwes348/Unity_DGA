@@ -30,8 +30,7 @@ public class Heart
     }
 
     public void TurnOnGlowAt(int i)
-    {
-        Debug.Log("turn on");
+    {        
         glowImages[i].enabled = true;
         glowImages[i].fillAmount = 1f;
     }
@@ -247,11 +246,9 @@ public class HeartBar : MonoBehaviour
     }
 
     private void FillGlow(int from, int to)
-    {
-        Debug.Log("FillGlow");
+    {        
         for (int i = from; i <= to; i++)
         {
-            Debug.Log("FillGlow for");
             Heart h = GetHeartAtHealthPoint(i);
             h.TurnOnGlowAt(i % healthPerHeart);
         }
