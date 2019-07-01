@@ -4,7 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - RightWeapon
+  - Shootable
   layers:
   - Default
   - TransparentFX
@@ -14,10 +14,10 @@ TagManager:
   - UI
   - 
   - 
+  - Lighting
   - Ground
-  - HitBox
-  - HurtBox
-  - HrtBoxPlayer
+  - Postprocessing
+  - 
   - 
   - 
   - 
@@ -39,6 +39,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Fire
+    uniqueID: 3804908061
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
