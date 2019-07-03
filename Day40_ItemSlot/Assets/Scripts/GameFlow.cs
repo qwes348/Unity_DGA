@@ -25,26 +25,23 @@ public class GameFlow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SceneMgr.instance.OnBeginLoad += OnBeginLoad;
-        SceneMgr.instance.OnLoadCompleted += OnLoadCompleted;
-        SceneMgr.instance.OnProgress += OnProgress;
         SceneMgr.instance.LoadScene("Scene1");
     }
 
-    private void OnProgress(float progress)
-    {        
-        progressBar.GetComponent<Image>().fillAmount = progress;
-    }
+    //private void OnProgress(float progress)
+    //{        
+    //    progressBar.GetComponent<Image>().fillAmount = progress;
+    //}
 
-    private void OnBeginLoad()
-    {        
-        progressBar.parent.gameObject.SetActive(true);
-    }
+    //private void OnBeginLoad()
+    //{        
+    //    progressBar.parent.gameObject.SetActive(true);
+    //}
 
-    private void OnLoadCompleted()
-    {        
-        progressBar.parent.gameObject.SetActive(false);
-    }
+    //private void OnLoadCompleted()
+    //{        
+    //    progressBar.parent.gameObject.SetActive(false);
+    //}
 
     public void InstantiatePlayer()
     {

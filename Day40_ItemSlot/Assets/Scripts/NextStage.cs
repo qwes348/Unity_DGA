@@ -13,7 +13,8 @@ public class NextStage : MonoBehaviour
         {
             transform.GetChild(0).DOLocalMoveX(-1, 1);    // 내부적으로 코루틴으로 되어있음 async함
             transform.GetChild(1).DOLocalMoveX(1, 1);
-            SceneMgr.instance.LoadScene(nextStage);            
+            SceneMgr.instance.LoadScene(nextStage);
+            UIController.instance.bag.Hide();
         }
     }
 }

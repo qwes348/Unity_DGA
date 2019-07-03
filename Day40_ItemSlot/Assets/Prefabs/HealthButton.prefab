@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 5963415116691248719}
   - component: {fileID: 5677891733481940532}
   - component: {fileID: 2819285782016284222}
+  - component: {fileID: 1098724704}
+  - component: {fileID: 1098724705}
   m_Layer: 5
   m_Name: HealthButton
   m_TagString: Untagged
@@ -118,6 +120,43 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5677891733481940532}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1098724705}
+        m_MethodName: Use
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &1098724704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268762056316905435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63ea6e77123f4b84e938738769c1ed5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemPrefab: {fileID: 2706233005927844542, guid: edace1567bdae994b8d3c723236ee7cc,
+    type: 3}
+--- !u!114 &1098724705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268762056316905435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe2d3e09e2f96344b0137c4e44d7b79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

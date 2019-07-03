@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    [HideInInspector]
     public GameObject[] slots;
-
 
     // Start is called before the first frame update
     void Start()

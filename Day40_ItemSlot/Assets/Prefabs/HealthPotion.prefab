@@ -113,6 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemButton: {fileID: 1268762056316905435, guid: e22182b8a491fc249b3b4aaee3bc9a9a,
     type: 3}
+  itemData: {fileID: 11400000, guid: 30aecaa7120bb6d488213d37f9690d80, type: 2}
 --- !u!1 &7712845708017812201
 GameObject:
   m_ObjectHideFlags: 0

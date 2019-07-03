@@ -69,6 +69,11 @@ public class PlayerFSM : MonoBehaviour
                 break;
             }
 
+            if(Input.GetKeyDown(KeyCode.I))
+            {
+                UIController.instance.bag.OnOff();
+            }
+
             yield return null;
 
         }
