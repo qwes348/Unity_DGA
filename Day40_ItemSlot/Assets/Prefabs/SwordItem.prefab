@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1460474697571520678}
   - component: {fileID: 7688715678749275574}
   m_Layer: 0
-  m_Name: HealthPotion
+  m_Name: SwordItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: -6174568118843670042, guid: 68ceb04d89b884342847a7bc2e6666da,
+  m_Sprite: {fileID: -5208233660972903108, guid: 68ceb04d89b884342847a7bc2e6666da,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -111,9 +111,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 568a1e98c5bc0254d8c22b90d841f96c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemButton: {fileID: 5157750696975555358, guid: e22182b8a491fc249b3b4aaee3bc9a9a,
+  itemButton: {fileID: 5157750696975555358, guid: c4748ec75d331aa49980a6e034dd19ab,
     type: 3}
-  itemData: {fileID: 11400000, guid: 30aecaa7120bb6d488213d37f9690d80, type: 2}
+  itemData: {fileID: 11400000, guid: 64e3cd204dd68b2429a87298061afa42, type: 2}
 --- !u!1 &7712845708017812201
 GameObject:
   m_ObjectHideFlags: 0

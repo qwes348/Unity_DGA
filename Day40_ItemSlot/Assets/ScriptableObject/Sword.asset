@@ -15,5 +15,5 @@ MonoBehaviour:
   itemName: Sword
   description: Long sword
   icon: {fileID: -5208233660972903108, guid: 68ceb04d89b884342847a7bc2e6666da, type: 3}
-  itemButtonPrefab: {fileID: 1268762056316905435, guid: 5d7b18c681747da4db3b290bcc2bab9b,
+  itemButtonPrefab: {fileID: 5157750696975555358, guid: c4748ec75d331aa49980a6e034dd19ab,
     type: 3}

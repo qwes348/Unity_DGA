@@ -15,5 +15,5 @@ MonoBehaviour:
   itemName: Health Potion
   description: Small health potion
   icon: {fileID: -6174568118843670042, guid: 68ceb04d89b884342847a7bc2e6666da, type: 3}
-  itemButtonPrefab: {fileID: 1268762056316905435, guid: e22182b8a491fc249b3b4aaee3bc9a9a,
+  itemButtonPrefab: {fileID: 5157750696975555358, guid: e22182b8a491fc249b3b4aaee3bc9a9a,
     type: 3}
