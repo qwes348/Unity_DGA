@@ -17,14 +17,15 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         if(transform.childCount > 0)
         {
             beginSlot = GetComponent<Slot>();
-            ItemData item = GameDataManager.instance.GetItem(beginSlot.slotId);
-            if (item == null)
+            Item item = GameDataManager.instance.GetItem(beginSlot.slotId);
+            if (item.itemData == null)
                 return;
             draggingItemButton = transform.GetChild(0);
             draggingItemButton.GetComponent<Image>().raycastTarget = false;
             Transform canvas = GetComponentInParent<Canvas>().transform;
-            //draggingItemButton.SetParent(canvas, false);
-            //draggingItemButton.SetAsLastSibling();
+
+            draggingItemButton.SetParent(canvas, false);
+            draggingItemButton.SetAsLastSibling();
         }
     }
 
@@ -42,12 +43,12 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         {
             if(enteredSlot.transform.childCount > 0)   // Swap
             {
-                print("Swap");
-                ItemData item = GameDataManager.instance.GetItem(beginSlot.slotId);
-                if (item == null)
+                //print("Swap");
+                Item item = GameDataManager.instance.GetItem(beginSlot.slotId);
+                if (item.itemData == null)
                     return;
-                ItemData item2 = GameDataManager.instance.GetItem(enteredSlot.slotId);
-                if (item2 == null)
+                Item item2 = GameDataManager.instance.GetItem(enteredSlot.slotId);
+                if (item2.itemData == null)
                     return;
                 Transform otherButton = enteredSlot.transform.GetChild(0);
                 draggingItemButton.SetParent(enteredSlot.transform, false);
@@ -62,9 +63,9 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             }
             else        // move
             {
-                print("move");
-                ItemData item = GameDataManager.instance.GetItem(beginSlot.slotId);
-                if (item == null)
+                //print("move");
+                Item item = GameDataManager.instance.GetItem(beginSlot.slotId);
+                if (item.itemData == null)
                     return;
                 draggingItemButton.SetParent(enteredSlot.transform, false);
                 draggingItemButton.localPosition = Vector3.zero;
@@ -77,6 +78,13 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         }
         else if(enteredSlot == null && draggingItemButton != null)      // drop case
         {
+            // rollback
+            //draggingItemButton.SetParent(transform, false);
+            //draggingItemButton.localPosition = Vector3.zero;
+
+            Item item = GameDataManager.instance.GetItem(beginSlot.slotId);
+            if (item.itemData == null)
+                return;
             draggingItemButton.GetComponent<Spawn>().SpawnItem();
             Destroy(draggingItemButton.gameObject);
             GameDataManager.instance.RemoveItemAt(beginSlot.slotId);

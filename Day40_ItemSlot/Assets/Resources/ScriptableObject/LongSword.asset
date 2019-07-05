@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ec5751f9ed69c046940349c2ae83524, type: 3}
-  m_Name: Sword
+  m_Name: LongSword
   m_EditorClassIdentifier: 
-  itemName: Sword
+  itemTypeId: 200
+  itemName: Long Sword
   description: Long sword
   icon: {fileID: -5208233660972903108, guid: 68ceb04d89b884342847a7bc2e6666da, type: 3}
   itemButtonPrefab: {fileID: 5157750696975555358, guid: c4748ec75d331aa49980a6e034dd19ab,

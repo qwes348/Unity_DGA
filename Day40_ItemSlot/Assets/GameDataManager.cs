@@ -2,11 +2,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
+
+[Serializable]
+public class Item
+{
+    public ItemData itemData;
+}
+
+[Serializable]
+public class ItemDataJson
+{
+    public int itemTypeId;
+    public string fileName;
+}
+
+[Serializable]
+public class ItemListJson
+{
+    public List<ItemDataJson> itemDataList;
+    public List<int> items;
+}
 
 public class GameDataManager : MonoBehaviour
 {
     [SerializeField]
-    ItemData[] items;
+    Item[] items;
 
     int timeStamp = 0;
 
@@ -19,13 +40,13 @@ public class GameDataManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this);
         }
-    }
+    }    
 
     public int FindEmptySlot()
     {
         for (int i = 0; i < items.Length; i++)
         {
-            if (items[i] == null)
+            if (items[i].itemData == null)
                 return i;
         }
         return -1;
@@ -33,7 +54,8 @@ public class GameDataManager : MonoBehaviour
 
     private void Start()
     {
-        UpdateTimeStamp();
+        //UpdateTimeStamp();
+        StartCoroutine(GetItemsJsonFromURL());
     }
 
     void UpdateTimeStamp()
@@ -45,9 +67,11 @@ public class GameDataManager : MonoBehaviour
         }
     }
 
-    public ItemData GetItem(int slotId)
+    public Item GetItem(int slotId)
     {
-        return items[slotId];
+        if(slotId < items.Length && items[slotId].itemData != null)
+            return items[slotId];
+        return null;
     }
 
     public int GetTimeStamp()
@@ -55,21 +79,23 @@ public class GameDataManager : MonoBehaviour
         return timeStamp;
     }
 
-    public ItemData[] GetItems()
+    public Item[] GetItems()
     {
         return items;
     }
 
     internal void AddItemAt(int i, ItemData itemData, bool redraw)
     {
-        items[i] = itemData;
+        Item item = new Item();
+        item.itemData = itemData;
+        items[i] = item;
         if(redraw)
             UpdateTimeStamp();
     }
 
     public void RemoveItemAt(int i)
     {
-        items[i] = null;
+        items[i].itemData = null;
         UpdateTimeStamp();
     }
 
@@ -77,18 +103,125 @@ public class GameDataManager : MonoBehaviour
     {
         if (from == to)
             return;
-        items[to] = items[from];
-        items[from] = null;
+        SwapItem(from, to, false);
         if (redraw)
             UpdateTimeStamp();
     }
 
     public void SwapItem(int fromId, int toId, bool redraw)
     {
-        ItemData a = items[fromId];
+        Item a = items[fromId];
         items[fromId] = items[toId];
         items[toId] = a;
         if (redraw)
             UpdateTimeStamp();
+    }
+
+    IEnumerator GetItemsJsonFromURL()
+    {
+        string url = "http://localhost:3000/inven";
+        using (UnityWebRequest www = UnityWebRequest.Get(url))
+        {
+            yield return www.SendWebRequest();
+            if(www.isNetworkError || www.isHttpError)
+            {
+                print(www.error);                
+            }
+            else
+            {
+                var json = www.downloadHandler.text;
+                print(json);
+                JsonToItems(json);
+                UpdateTimeStamp();
+            }
+        }
+    }
+
+    private void JsonToItems(string json)
+    {
+        var list = JsonUtility.FromJson<ItemListJson>(json);
+        var itemList = new List<Item>();
+        var itemDataList = new List<ItemData>();
+        foreach(var itemDataJson in list.itemDataList)
+        {
+            ItemData d = Resources.Load<ItemData>("ScriptableObject/" + itemDataJson.fileName);
+            if (d != null)
+                itemDataList.Add(d);
+            else
+                print("failed itemData: " + itemDataJson.fileName);
+        }
+        foreach(int itemTypedId in list.items)
+        {
+            int index = itemDataList.FindIndex(o => o.itemTypeId == itemTypedId);
+            if(index != -1)
+            {
+                Item item = new Item();
+                item.itemData = itemDataList[index];
+                itemList.Add(item);
+            }
+            else
+            {
+                Item item = new Item();
+                item.itemData = null;
+                itemList.Add(item);                
+            }
+        }
+        this.items = itemList.ToArray();
+    }
+
+    public void UploadItems()
+    {
+        StartCoroutine(PostItemsJsonToURL());
+    }
+
+    IEnumerator PostItemsJsonToURL()
+    {
+        string json = ItemsToJson();
+        string url = "http://localhost:3000/inven";
+        using (UnityWebRequest www = UnityWebRequest.Put(url, json))
+        {
+            www.method = "POST";
+            www.SetRequestHeader("Content-Type", "application/json");
+
+            yield return www.SendWebRequest();
+            if (!www.isNetworkError && www.responseCode == 201)
+            {
+                print("Upload Ok!");
+            }
+            else
+            {
+                print("Upload Fail: " + www.responseCode);
+            }
+        }
+    }
+
+    public string ItemsToJson()
+    {
+        var itemList = new ItemListJson();
+        var itemDataList = new List<ItemDataJson>();
+        itemList.itemDataList = itemDataList;
+        itemList.items = new List<int>();
+        
+        foreach(var item in this.items)
+        {
+            if(item.itemData != null)
+            {
+                if(!itemList.itemDataList.Exists(v => v.itemTypeId == item.itemData.itemTypeId))
+                {
+                    var itemDataJson = new ItemDataJson();
+                    itemDataJson.itemTypeId = item.itemData.itemTypeId;
+                    itemDataJson.fileName = item.itemData.name;
+                    itemDataList.Add(itemDataJson);
+                }
+                itemList.items.Add(item.itemData.itemTypeId);
+            }
+            else
+            {
+                itemList.items.Add(0);
+            }
+        }
+
+        string dataAsJson = JsonUtility.ToJson(itemList, true);
+        return dataAsJson;
     }
 }
