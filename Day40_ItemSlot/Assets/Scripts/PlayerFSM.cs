@@ -9,6 +9,7 @@ public class PlayerFSM : MonoBehaviour
     public enum State { Entry = -1, Idle, Walk, Attack}
     public State state = State.Idle;
     public State prevState = State.Entry;
+    public bool movable = false;
 
     Animator anim;
     float lastX, lastY;
@@ -52,13 +53,21 @@ public class PlayerFSM : MonoBehaviour
         while(true)
         {
             anim.SetInteger("State", (int)state);
-            anim.SetInteger("PrevState", (int)prevState);
+            anim.SetInteger("PrevState", (int)prevState);            
 
             float h = Input.GetAxisRaw("Horizontal");
             float v = Input.GetAxisRaw("Vertical");
-            Vector3 heading = new Vector3(h, v, 0).normalized;
-            Vector3 movement = heading * moveSpeed * Time.deltaTime;
-            transform.position += movement;
+            Vector3 heading;
+            if (movable)
+            {
+                heading = new Vector3(h, v, 0).normalized;
+                Vector3 movement = heading * moveSpeed * Time.deltaTime;
+                transform.position += movement;
+            }
+            else
+            {
+                heading = Vector3.zero;
+            }
 
             UpdateAnimation(heading);
 

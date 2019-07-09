@@ -7,8 +7,20 @@ using System;
 
 public class Bag : MonoBehaviour
 {
-
+    [HideInInspector]
+    public GameObject[] slots;
     bool isActive = false;
+
+    void Start()
+    {
+        List<Slot> list = new List<Slot>(FindObjectsOfType<Slot>());
+        slots = new GameObject[list.Count];
+
+        foreach (var s in list)
+        {
+            slots[s.slotId] = s.gameObject;  // FindObjectsOfType으로는 순서가 보장되지않으므로 Slot스크립트에 slotId를줘서 순서를 맞춰준다.
+        }
+    }
 
     public void Show()
     {
@@ -35,8 +47,7 @@ public class Bag : MonoBehaviour
     }
 
     public void UpdateBag(Item[] items)
-    {
-        GameObject[] slots = GetComponent<Inventory>().slots;
+    {        
         int i = 0;
         foreach(var item in items)
         {

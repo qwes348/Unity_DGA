@@ -114,6 +114,8 @@ MonoBehaviour:
   itemButton: {fileID: 5157750696975555358, guid: e22182b8a491fc249b3b4aaee3bc9a9a,
     type: 3}
   itemData: {fileID: 11400000, guid: 30aecaa7120bb6d488213d37f9690d80, type: 2}
+  pickupEffect: {fileID: 2890927286900294783, guid: f0bbf2ad6983c594583316c8bbb030c0,
+    type: 3}
 --- !u!1 &7712845708017812201
 GameObject:
   m_ObjectHideFlags: 0

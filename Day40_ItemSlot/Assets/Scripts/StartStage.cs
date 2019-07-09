@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class StartStage : MonoBehaviour
 {
+    public SceneTransition sceneTransition;
+    public AudioSource music;
+
     void Start()
     {
         var player = GameFlow.instance.player;
@@ -23,6 +27,10 @@ public class StartStage : MonoBehaviour
         {
             player.transform.position = transform.position;
         }
+        StartCoroutine(sceneTransition.FadeOut());
+        music?.DOFade(1f, 1f);
+
+        player.GetComponent<PlayerFSM>().movable = true;
 
         UIController.instance.bag.Show();
     }
