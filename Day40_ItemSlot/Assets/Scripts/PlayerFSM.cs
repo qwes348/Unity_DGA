@@ -9,10 +9,14 @@ public class PlayerFSM : MonoBehaviour
     public enum State { Entry = -1, Idle, Walk, Attack}
     public State state = State.Idle;
     public State prevState = State.Entry;
-    public bool movable = false;
+    public bool controllable = true;
+    public Vector3 lookAtHere;
 
     Animator anim;
     float lastX, lastY;
+
+    FloatingJoystick joystick;
+    JoystickButton attackButton;
 
     public void SetState(State state)
     {
@@ -28,6 +32,10 @@ public class PlayerFSM : MonoBehaviour
     
     IEnumerator Start()
     {
+        // Turn off FadeInPanel's RaycastTartget !!
+        joystick = FindObjectOfType<FloatingJoystick>();
+        attackButton = FindObjectOfType<JoystickButton>();
+
         while (true)
         {
             anim.SetInteger("State", (int)state);
@@ -58,20 +66,20 @@ public class PlayerFSM : MonoBehaviour
             float h = Input.GetAxisRaw("Horizontal");
             float v = Input.GetAxisRaw("Vertical");
             Vector3 heading;
-            if (movable)
+            if (controllable)
             {
-                heading = new Vector3(h, v, 0).normalized;
+                heading = new Vector3(h + joystick.Horizontal, v + joystick.Vertical, 0).normalized;
                 Vector3 movement = heading * moveSpeed * Time.deltaTime;
                 transform.position += movement;
             }
             else
             {
-                heading = Vector3.zero;
+                heading = lookAtHere;
             }
 
             UpdateAnimation(heading);
-
-            if (Input.GetKeyDown(KeyCode.K))
+            
+            if (Input.GetKeyDown(KeyCode.C) || attackButton.pressed)
             {
                 anim.SetTrigger("OnAttack");
                 SetState(State.Attack);
