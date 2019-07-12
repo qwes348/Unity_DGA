@@ -26,7 +26,7 @@ public class PlayerFSM : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this);
-        anim = GetComponent<Animator>();
+        anim = transform.Find("Model").GetComponent<Animator>();
     }
 
     
@@ -66,6 +66,7 @@ public class PlayerFSM : MonoBehaviour
             float h = Input.GetAxisRaw("Horizontal");
             float v = Input.GetAxisRaw("Vertical");
             Vector3 heading;
+            
             if (controllable)
             {
                 heading = new Vector3(h + joystick.Horizontal, v + joystick.Vertical, 0).normalized;
@@ -75,7 +76,7 @@ public class PlayerFSM : MonoBehaviour
             else
             {
                 heading = lookAtHere;
-            }
+            }            
 
             UpdateAnimation(heading);
             

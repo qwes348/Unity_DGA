@@ -975,7 +975,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 224a06f069f52414e8d7030efd98a3b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 5438012939768603605, guid: f0efe1215bf458643a1c83457a9bdbd6,
+  playerPrefab: {fileID: 7901027623559127700, guid: 6a1dc9f7b947daa4a9dab0268ca3d703,
     type: 3}
   progressBar: {fileID: 958850854}
   player: {fileID: 0}

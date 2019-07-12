@@ -475,6 +475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneTransition: {fileID: 1785578075}
   music: {fileID: 703534922}
+  exitTimelineAsset: {fileID: 11400000, guid: 74de541cd0d6dc64f9def2a29bc3298e, type: 2}
 --- !u!4 &826376439
 Transform:
   m_ObjectHideFlags: 0
