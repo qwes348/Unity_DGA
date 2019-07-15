@@ -44,6 +44,7 @@ public class NextStage : MonoBehaviour
                     continue;
                 print(animTrack.name);
                 if (animTrack.name == "Player")
+
                 {
                     animTrack.position = player.transform.position;
                     break;
