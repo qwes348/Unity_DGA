@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 using DG.Tweening;
+using System;
 
 public class StartStage : MonoBehaviour
 {
@@ -21,6 +22,15 @@ public class StartStage : MonoBehaviour
         {
             GameFlow.instance.InstantiatePlayer();
             player = GameFlow.instance.player;
+        }
+        DeactivateEditorOnlyObjects();
+    }
+
+    private void DeactivateEditorOnlyObjects()
+    {
+        foreach (var o in GameObject.FindGameObjectsWithTag("EditorOnly"))
+        {
+            o.SetActive(false);            
         }
     }
 
