@@ -19,9 +19,9 @@ public class ActivateCamera : MonoBehaviour
     {
         if(vcam != null && vcam.Follow != null && GameFlow.instance.player != null)
         {
-            var bb = vcam.Follow.GetComponent<CinemachineTargetGroup>().BoundingBox;
-            print(bb.extents + ", " + bb.extents.magnitude);
-            if (bb.extents.magnitude >= distance)
+            var bb = vcam.Follow.GetComponent<CinemachineTargetGroup>().Sphere;
+            print(bb.radius + ", " + bb.radius);
+            if (bb.radius >= distance)
                 vcam.Priority = 9;
             else
                 vcam.Priority = 11;      // 우선순위가 "높을"수록 우선적임

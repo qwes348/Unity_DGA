@@ -2175,16 +2175,6 @@ PrefabInstance:
       propertyPath: music
       value: 
       objectReference: {fileID: 1200565814}
-    - target: {fileID: 6048547068758485513, guid: 6f4ac91d83ad9bb45aa7754981a0798d,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.99837035
-      objectReference: {fileID: 0}
-    - target: {fileID: 7211560018796584920, guid: 6f4ac91d83ad9bb45aa7754981a0798d,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.99840295
-      objectReference: {fileID: 0}
     - target: {fileID: 7863330739937838940, guid: 6f4ac91d83ad9bb45aa7754981a0798d,
         type: 3}
       propertyPath: m_SceneBindings.Array.data[2].value
@@ -2211,6 +2201,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 74de541cd0d6dc64f9def2a29bc3298e,
         type: 2}
+    - target: {fileID: 6048547068758485513, guid: 6f4ac91d83ad9bb45aa7754981a0798d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.99837035
+      objectReference: {fileID: 0}
+    - target: {fileID: 7211560018796584920, guid: 6f4ac91d83ad9bb45aa7754981a0798d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.99840295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f4ac91d83ad9bb45aa7754981a0798d, type: 3}
 --- !u!1 &379701214
@@ -2364,7 +2364,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_LocalRotation: {x: 0, y: 0, z: 2.8342959e-10, w: 1}
+  m_LocalRotation: {x: 3.761582e-37, y: 4.566288e-39, z: 5.1579163e-10, w: 1}
   m_LocalPosition: {x: 3.23, y: 2.64, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -4474,7 +4474,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2006025422}
-  m_LocalRotation: {x: 0, y: 0, z: 2.8342959e-10, w: 1}
+  m_LocalRotation: {x: 3.761582e-37, y: 4.566288e-39, z: 5.1579163e-10, w: 1}
   m_LocalPosition: {x: 3.23, y: 2.64, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
