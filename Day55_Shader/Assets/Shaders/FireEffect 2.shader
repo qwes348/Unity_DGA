@@ -25,7 +25,7 @@
         };
 
         //half _Glossiness;	// float의 절반 바이트 즉 2바이트        
-        //fixed4 _Color;		// fixed == half의 반 즉 1바이트
+        //fixed4 _Color;		// fixed == 11 비트
 
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
