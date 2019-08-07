@@ -58,8 +58,19 @@
 			float spec = saturate(dot(H, s.Normal));
 			//spec = pow(spec, 100);
 			spec = pow(spec, _SpecPow);
-			specularColor = spec * _SpecCol.rgb * s.Gloss;
-			final.rgb = diffuseColor.rgb + specularColor.rgb;
+			specularColor = spec * _SpecCol.rgb * s.Gloss;  // s.Gloss => 머리카락 제외 피부만 컬러를 넣게해줌
+
+			// Rim term
+			float3 rimColor;
+			float rim = abs(dot(viewDir, s.Normal));
+			float invRim = 1-rim;
+			rimColor = pow(invRim, 6) * float3(1, 1, 1);
+
+			// Fake specular term  // 보는방향에 따라 Specular가 이동함
+			float3 specularColor2;
+			specularColor2 = pow(rim, 50) * float3(1, 1, 1) * s.Gloss;
+
+			final.rgb = diffuseColor.rgb + specularColor.rgb + rimColor.rgb + specularColor2.rgb;			
 			final.a = s.Alpha;
 
 			return final;
