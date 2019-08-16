@@ -5,8 +5,8 @@
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
 		_NoiseTex ("NoiseTex", 2D) = "white" {}
 		_Cut ("Alpha Cut", Range(0, 1)) = 0.1
-		_OutlineColor ("Outline Color", Color) = (0, 0, 0, 0)
-		_OutlineThickness ("Outline Thickness", Range(0, 1)) = 0.2
+		[HDR] _OutColor("OutlineColor", Color) = (1,1,1,1)
+		_OutThickness("Outline Thickness", Range(1, 1.5)) = 1.15
     }
     SubShader
     {
@@ -36,7 +36,7 @@
         ENDCG		
 		// 2nd Pass
 		zwrite off
-		// ZTest Less		// default is LEqual, Z Test 통과(즉 그리는)조건: 거리가 같거나 작을 경우 그린다.
+		//ZTest Less		// default is LEqual, Z Test 통과(즉 그리는)조건: 거리가 같거나 작을 경우 그린다.
 
 		CGPROGRAM        
         #pragma surface surf Lambert alpha:fade
@@ -44,6 +44,8 @@
         sampler2D _MainTex;
 		sampler2D _NoiseTex;
 		float _Cut;
+		float4 _OutColor;
+		float _OutThickness;
 
         struct Input
         {
@@ -67,7 +69,7 @@
 			}
 
 			float outline;
-			if(noise.r >= _Cut * 1.2)
+			if(noise.r >= _Cut * _OutThickness)
 			{
 				outline = 0;
 			}
@@ -75,7 +77,8 @@
 			{
 				outline = 1;
 			}
-			o.Emission = outline * float3(1, 0, 0);
+			//o.Emission = float3(IN.uv_MainTex, 0); 
+			o.Emission = outline * _OutColor.rgb;
             o.Alpha = alpha;
         }
         ENDCG		
