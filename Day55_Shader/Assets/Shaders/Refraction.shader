@@ -28,7 +28,7 @@
         void surf (Input IN, inout SurfaceOutput o)
         {
             fixed4 ref = tex2D (_MainTex, IN.uv_MainTex);
-            float2 screenUV = IN.screenPos.rgb / IN.screenPos.a;	// => 0 ~ 1 UV range, NDC(Normalized Device Coordinates)
+            float2 screenUV = IN.screenPos.rgb / IN.screenPos.a;	// => 0 ~ 1 UV range, NDC(Normalized Device Coordinates) 장치(해상도)의 상관없이 노멀라이즈
 			//o.Emission = IN.screenPos.rgb;
             o.Emission = tex2D(_GrabTexture, screenUV.xy + ref.x * _SinTime.w * 0.05);
         }

@@ -118,7 +118,7 @@
            // color of backfaces/ top
            float4 topColor = _TopColor * (foam + result);		   
            //VFACE returns positive for front facing, negative for backfacing
-           return facing > 0 ? finalResult: topColor;
+           return facing > 0 ? finalResult: topColor;		   
                
          }
          ENDCG

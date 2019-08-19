@@ -25,7 +25,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _DstBlend: 10
-    - _FillAmount: 0.3
+    - _FillAmount: 0.7
     - _Rim: 0
     - _RimPower: 1.99
     - _SrcBlend: 5
@@ -34,5 +34,5 @@ Material:
     m_Colors:
     - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Tint: {r: 1, g: 1, b: 0.9686274, a: 0.5019608}
-    - _TopColor: {r: 0.20425412, g: 0.58000225, b: 0.8490566, a: 0.59607846}
+    - _Tint: {r: 1, g: 1, b: 0.9686274, a: 0.5647059}
+    - _TopColor: {r: 0.20425409, g: 0.58000225, b: 0.8490566, a: 0.5176471}
