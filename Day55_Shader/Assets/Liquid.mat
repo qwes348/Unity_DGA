@@ -20,19 +20,19 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: b401bf6d38fda5249af9e944d8da1955, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _DstBlend: 10
-    - _FillAmount: 0.7
+    - _FillAmount: 0.4
     - _Rim: 0
-    - _RimPower: 1.99
+    - _RimPower: 0
     - _SrcBlend: 5
     - _WobbleX: 0
     - _WobbleZ: 0
     m_Colors:
     - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Tint: {r: 1, g: 1, b: 0.9686274, a: 0.5647059}
-    - _TopColor: {r: 0.20425409, g: 0.58000225, b: 0.8490566, a: 0.5176471}
+    - _Tint: {r: 1, g: 1, b: 1, a: 0.5176471}
+    - _TopColor: {r: 1, g: 1, b: 1, a: 0.5254902}

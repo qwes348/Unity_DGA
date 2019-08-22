@@ -12,20 +12,21 @@
         _Rim ("Foam Line Width", Range(0,0.1)) = 0.0    
         _RimColor ("Rim Color", Color) = (1,1,1,1)
         _RimPower ("Rim Power", Range(0,10)) = 0.0
-		[Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend("SrcBled Mode", Float) = 5
-		[Enum(UnityEngine.Rendering.BlendMode)] _DstBlend("DstBled Mode", Float) = 10
+		//[Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend("SrcBled Mode", Float) = 5
+		//[Enum(UnityEngine.Rendering.BlendMode)] _DstBlend("DstBled Mode", Float) = 10
     }
  
     SubShader
     {
         Tags { "RenderType"="Transparent" "Queue"="Transparent"  "DisableBatching" = "True" }
- 
-                Pass
+		Blend SrcAlpha OneMinusSrcAlpha
+        
+		Pass
         {
          Zwrite off
          Cull Off // we want the front and back faces
          AlphaToMask On // transparency
-		 Blend[_SrcBlend] [_DstBlend]
+		 //Blend[_SrcBlend] [_DstBlend]
  
          CGPROGRAM
  
@@ -118,7 +119,8 @@
            // color of backfaces/ top
            float4 topColor = _TopColor * (foam + result);		   
            //VFACE returns positive for front facing, negative for backfacing
-           return facing > 0 ? finalResult: topColor;		   
+           //return facing > 0 ? finalResult: topColor;	
+		   return finalResult;		   
                
          }
          ENDCG
