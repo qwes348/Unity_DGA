@@ -54,3 +54,17 @@
         }
     }
 }
+
+/*
+TextureFile(sRGB)	=>		Shader		=>		Rendering(Display)
+	Gamma			=>		Gamma		=>		Gamma
+							0.5 * 2 = 1
+
+	Gamma			=>		Linear		=>		Gamma
+							0.5^2.2 = 0.217 * 2 = 0.44
+								=> 0.217 * a = 1
+								=> a = 4.59		// == ColorSpaceDouble
+
+								4.59유도식
+							0.5^2.2 * (1 / 0.5^2.2) => 1
+*/
