@@ -11,7 +11,7 @@
     {
         Tags { "RenderType"="Opaque" }
 
-        Pass
+        Pass    // Directional Light Pass
         {
 			Tags { 
 					"LightMode"="ForwardBase"	
@@ -28,7 +28,7 @@
             ENDCG
         }
 
-		Pass	// 2pass
+		Pass	// PointLight Pass
         {
 			Tags { 
 					"LightMode"="ForwardAdd"	// LightMode를 바꿔줘서 두번째라이트도 인식
@@ -37,11 +37,15 @@
 			zwrite off
 
             CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-			#pragma target 3.0
+            #pragma target 3.0
 
-			#define POINT
+            //#pragma multi_compile DIRECTIONAL DIRECTIONAL_COOKIE POINT POINT_COOKIE SPOT     // 두번째 Directional도 Point로 인식하는문제 해결
+            #pragma multi_compile_fwdadd
+
+            #pragma vertex vert
+            #pragma fragment frag			
+
+			// #define POINT
 
 			#include "MyLighting.cginc"
 
