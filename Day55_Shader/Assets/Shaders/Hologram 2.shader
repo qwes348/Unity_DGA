@@ -24,8 +24,7 @@
         
         void surf (Input IN, inout SurfaceOutput o)
         {            
-			o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));
-			
+			o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));			
 			o.Emission = _HologramColor;		// 소수부분만 살리고 정수부분은 버리는 frac함수
 			float rim = saturate(dot(o.Normal, IN.viewDir));
 			rim = pow(1-rim, 3) + pow(frac(IN.worldPos.g * 3 - _Time.y), 30);			
