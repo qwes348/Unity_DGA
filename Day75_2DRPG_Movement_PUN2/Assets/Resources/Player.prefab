@@ -13,10 +13,11 @@ GameObject:
   - component: {fileID: 234973779461590531}
   - component: {fileID: 234973779461590532}
   - component: {fileID: 234973779461590535}
-  - component: {fileID: -3959299174046349128}
   - component: {fileID: 4536429157594565643}
-  - component: {fileID: -2395550076531807921}
   - component: {fileID: -5744375025028963332}
+  - component: {fileID: 5380388968180780060}
+  - component: {fileID: 1078359906670099975}
+  - component: {fileID: 8769236676164057181}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -133,21 +134,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAttacking: 0
---- !u!114 &-3959299174046349128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 234973779461590528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f691dca66d5dd1b49bc33dc31ccd2f75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 4
-  state: 0
-  prevState: -1
 --- !u!114 &4536429157594565643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,26 +152,11 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
+  - {fileID: 5380388968180780060}
   - {fileID: -5744375025028963332}
-  - {fileID: -3959299174046349128}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &-2395550076531807921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 234973779461590528}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 0
-  m_SynchronizeScale: 0
 --- !u!114 &-5744375025028963332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,24 +172,84 @@ MonoBehaviour:
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
   m_SynchronizeParameters:
-  - Type: 4
-    SynchronizeType: 2
-    Name: OnMove
-  - Type: 9
-    SynchronizeType: 2
-    Name: OnAttack
   - Type: 1
-    SynchronizeType: 2
+    SynchronizeType: 1
     Name: LastDirX
   - Type: 1
-    SynchronizeType: 2
+    SynchronizeType: 1
     Name: LastDirY
   - Type: 1
-    SynchronizeType: 2
+    SynchronizeType: 1
     Name: DirX
   - Type: 1
-    SynchronizeType: 2
+    SynchronizeType: 1
     Name: DirY
+  - Type: 4
+    SynchronizeType: 1
+    Name: Move
+  - Type: 4
+    SynchronizeType: 0
+    Name: Attack
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+--- !u!114 &5380388968180780060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234973779461590528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 801c9b68778a6ce44a09892851deb4a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 4
+--- !u!50 &1078359906670099975
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234973779461590528}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!61 &8769236676164057181
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234973779461590528}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.02017653, y: 0.5256238}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 0.8805032, y: 1.0691824}
+    newSize: {x: 0.8805032, y: 1.0691824}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.66080284, y: 0.86293316}
+  m_EdgeRadius: 0
