@@ -1,0 +1,19 @@
+{
+  "name": "gamedb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "hwang",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/hapi": "^18.4.0",
+    "boom": "^7.1.1",
+    "hapi-auth-jwt2": "^8.6.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^4.13.6"
+  }
+}
